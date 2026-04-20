@@ -1,1369 +1,237 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="sl">
 
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>SwitchSmart — Lower Your Telecom Bill Today</title>
-  <link
-    href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&display=swap"
-    rel="stylesheet">
+  <title>MenjajOperaterja — Znižajte Telefonski Račun Danes</title>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <style>
-    *,
-    *::before,
-    *::after {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0
-    }
-
-    html {
-      scroll-behavior: smooth;
-      font-size: 16px
-    }
-
-    body {
-      font-family: 'Plus Jakarta Sans', sans-serif;
-      color: #1e293b;
-      background: #fff;
-      line-height: 1.65;
-      -webkit-font-smoothing: antialiased;
-      overflow-x: hidden
-    }
-
-    .container {
-      width: 100%;
-      max-width: 1100px;
-      margin: 0 auto;
-      padding: 0 28px
-    }
-
-    .eyebrow {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      font-size: 11px;
-      font-weight: 700;
-      letter-spacing: 1.2px;
-      text-transform: uppercase;
-      color: #2f54eb;
-      background: #eef2ff;
-      border: 1px solid #c7d2fe;
-      padding: 5px 14px;
-      border-radius: 30px;
-      margin-bottom: 16px
-    }
-
-    .eyebrow-dot {
-      width: 5px;
-      height: 5px;
-      background: #2f54eb;
-      border-radius: 50%
-    }
-
-    .eyebrow--light {
-      color: #a5b4fc;
-      background: rgba(165, 180, 252, 0.1);
-      border-color: rgba(165, 180, 252, 0.2)
-    }
-
-    .eyebrow--light .eyebrow-dot {
-      background: #a5b4fc
-    }
-
-    .section-title {
-      font-size: clamp(26px, 3vw, 36px);
-      font-weight: 800;
-      line-height: 1.2;
-      color: #0f172a;
-      margin-bottom: 14px
-    }
-
-    .section-title--white {
-      color: #fff
-    }
-
-    .section-desc {
-      font-size: 16px;
-      color: #64748b;
-      line-height: 1.8;
-      max-width: 520px
-    }
-
-    .section-desc--white {
-      color: rgba(255, 255, 255, 0.62)
-    }
-
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-      padding: 14px 30px;
-      border-radius: 10px;
-      font-family: inherit;
-      font-size: 15px;
-      font-weight: 700;
-      cursor: pointer;
-      border: none;
-      text-decoration: none;
-      transition: all 0.18s ease;
-      white-space: nowrap;
-      line-height: 1
-    }
-
-    .btn-primary {
-      background: #2f54eb;
-      color: #fff;
-      box-shadow: 0 4px 16px rgba(47, 84, 235, 0.38)
-    }
-
-    .btn-primary:hover {
-      background: #1e3fcc;
-      box-shadow: 0 6px 24px rgba(47, 84, 235, 0.5);
-      transform: translateY(-1px)
-    }
-
-    .btn-outline {
-      background: transparent;
-      color: #fff;
-      border: 1.5px solid rgba(255, 255, 255, 0.25)
-    }
-
-    .btn-outline:hover {
-      background: rgba(255, 255, 255, 0.08);
-      border-color: rgba(255, 255, 255, 0.5);
-      transform: translateY(-1px)
-    }
-
-    .nav {
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      background: rgba(255, 255, 255, 0.96);
-      backdrop-filter: blur(10px);
-      border-bottom: 1px solid #e2e8f8
-    }
-
-    .nav-inner {
-      max-width: 1100px;
-      margin: 0 auto;
-      padding: 0 28px;
-      height: 68px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between
-    }
-
-    .logo {
-      font-size: 20px;
-      font-weight: 800;
-      color: #0f172a;
-      text-decoration: none;
-      letter-spacing: -0.4px
-    }
-
-    .logo span {
-      color: #2f54eb
-    }
-
-    .nav-menu {
-      display: flex;
-      gap: 32px;
-      list-style: none
-    }
-
-    .nav-menu a {
-      font-size: 14px;
-      font-weight: 500;
-      color: #475569;
-      text-decoration: none;
-      transition: color 0.15s
-    }
-
-    .nav-menu a:hover {
-      color: #2f54eb
-    }
-
-    .nav-cta {
-      display: flex;
-      align-items: center;
-      gap: 12px
-    }
-
-    .hero {
-      background: #0f172a;
-      padding: 80px 28px 0;
-      overflow: hidden;
-      position: relative
-    }
-
-    .hero-glow-1 {
-      position: absolute;
-      top: -100px;
-      right: -60px;
-      width: 700px;
-      height: 700px;
-      border-radius: 50%;
-      background: radial-gradient(circle, rgba(47, 84, 235, 0.15) 0%, transparent 65%);
-      pointer-events: none
-    }
-
-    .hero-glow-2 {
-      position: absolute;
-      bottom: 0;
-      left: -80px;
-      width: 400px;
-      height: 400px;
-      border-radius: 50%;
-      background: radial-gradient(circle, rgba(16, 185, 129, 0.07) 0%, transparent 70%);
-      pointer-events: none
-    }
-
-    .hero-inner {
-      max-width: 1060px;
-      margin: 0 auto;
-      display: grid;
-      grid-template-columns: 1fr 420px;
-      gap: 48px;
-      align-items: end;
-      position: relative;
-      z-index: 2;
-      min-height: 620px
-    }
-
-    .hero-content {
-      padding-bottom: 88px
-    }
-
-    .hero-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      background: rgba(47, 84, 235, 0.14);
-      border: 1px solid rgba(47, 84, 235, 0.3);
-      padding: 7px 16px;
-      border-radius: 30px;
-      font-size: 12px;
-      font-weight: 600;
-      color: #a5b4fc;
-      margin-bottom: 24px
-    }
-
-    .hero-badge-dot {
-      width: 7px;
-      height: 7px;
-      background: #818cf8;
-      border-radius: 50%;
-      flex-shrink: 0;
-      animation: pulse 2s infinite
-    }
-
-    @keyframes pulse {
-
-      0%,
-      100% {
-        opacity: 1;
-        transform: scale(1)
-      }
-
-      50% {
-        opacity: .6;
-        transform: scale(1.3)
-      }
-    }
-
-    .hero h1 {
-      font-size: clamp(34px, 4vw, 54px);
-      font-weight: 800;
-      color: #fff;
-      line-height: 1.1;
-      letter-spacing: -1px;
-      margin-bottom: 22px
-    }
-
-    .hero h1 em {
-      font-style: normal;
-      color: #818cf8
-    }
-
-    .hero-sub {
-      font-size: 17px;
-      color: rgba(255, 255, 255, 0.58);
-      line-height: 1.8;
-      max-width: 480px;
-      margin: 0 0 36px
-    }
-
-    .hero-buttons {
-      display: flex;
-      gap: 14px;
-      flex-wrap: wrap
-    }
-
-    .hero-trust {
-      display: flex;
-      gap: 20px;
-      flex-wrap: wrap;
-      margin-top: 36px;
-      padding-top: 30px;
-      border-top: 1px solid rgba(255, 255, 255, 0.08)
-    }
-
-    .trust-item {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      font-size: 13px;
-      color: rgba(255, 255, 255, 0.42);
-      font-weight: 500
-    }
-
-    .trust-check {
-      width: 20px;
-      height: 20px;
-      background: rgba(16, 185, 129, 0.18);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 11px;
-      color: #34d399;
-      border-radius: 50%;
-      flex-shrink: 0
-    }
-
-    /* ── HERO IMAGE FIX ── */
-    .hero-image-wrap {
-      position: relative;
-      align-self: stretch;
-      display: flex;
-      align-items: flex-end;
-      justify-content: center;
-      overflow: hidden
-    }
-
-    .hero-image-wrap img {
-      width: 100%;
-      height: 100%;
-      display: block;
-      object-fit: cover;
-      object-position: top center;
-      border-radius: 0
-    }
-
-    .steps {
-      background: #fff;
-      padding: 96px 28px
-    }
-
-    .steps-header {
-      margin-bottom: 60px
-    }
-
-    .steps-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 2px;
-      background: #e2e8f8;
-      border-radius: 18px;
-      overflow: hidden
-    }
-
-    .step-card {
-      background: #fff;
-      padding: 40px 36px;
-      position: relative;
-      transition: background 0.2s
-    }
-
-    .step-card:hover {
-      background: #fafbff
-    }
-
-    .step-n {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      margin-bottom: 20px
-    }
-
-    .step-n-badge {
-      width: 36px;
-      height: 36px;
-      border-radius: 10px;
-      background: #eef2ff;
-      color: #2f54eb;
-      font-size: 15px;
-      font-weight: 800;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0
-    }
-
-    .step-n-label {
-      font-size: 11px;
-      font-weight: 700;
-      letter-spacing: 1px;
-      text-transform: uppercase;
-      color: #94a3b8
-    }
-
-    .step-card h3 {
-      font-size: 18px;
-      font-weight: 700;
-      color: #0f172a;
-      margin-bottom: 10px
-    }
-
-    .step-card p {
-      font-size: 14px;
-      color: #64748b;
-      line-height: 1.75
-    }
-
-    .step-divider {
-      position: absolute;
-      right: -14px;
-      top: 50%;
-      transform: translateY(-50%);
-      width: 28px;
-      height: 28px;
-      border-radius: 50%;
-      background: #2f54eb;
-      color: #fff;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 13px;
-      z-index: 2
-    }
-
-    .comparison {
-      background: #0f172a;
-      padding: 96px 28px
-    }
-
-    .comparison-grid {
-      display: grid;
-      grid-template-columns: 1fr 60px 1fr;
-      align-items: start;
-      margin-top: 56px;
-      gap: 0
-    }
-
-    .vs-card {
-      border-radius: 18px;
-      padding: 40px 36px
-    }
-
-    .vs-card-ours {
-      background: linear-gradient(145deg, #2f54eb 0%, #3d66f0 100%);
-      box-shadow: 0 20px 60px rgba(47, 84, 235, 0.3)
-    }
-
-    .vs-card-theirs {
-      background: rgba(255, 255, 255, 0.04);
-      border: 1px solid rgba(255, 255, 255, 0.08)
-    }
-
-    .vs-card-title {
-      font-size: 15px;
-      font-weight: 700;
-      margin-bottom: 28px;
-      display: flex;
-      align-items: center;
-      gap: 8px
-    }
-
-    .vs-card-ours .vs-card-title {
-      color: #fff
-    }
-
-    .vs-card-theirs .vs-card-title {
-      color: rgba(255, 255, 255, 0.35)
-    }
-
-    .vs-row {
-      display: flex;
-      align-items: flex-start;
-      gap: 12px;
-      margin-bottom: 16px;
-      font-size: 14px;
-      line-height: 1.55
-    }
-
-    .vs-card-ours .vs-row {
-      color: rgba(255, 255, 255, 0.88)
-    }
-
-    .vs-card-theirs .vs-row {
-      color: rgba(255, 255, 255, 0.3)
-    }
-
-    .vs-icon {
-      width: 22px;
-      height: 22px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 11px;
-      font-weight: 700;
-      flex-shrink: 0;
-      margin-top: 1px
-    }
-
-    .vs-card-ours .vs-icon {
-      background: rgba(255, 255, 255, 0.18);
-      color: #fff
-    }
-
-    .vs-card-theirs .vs-icon {
-      background: rgba(255, 255, 255, 0.06);
-      color: rgba(255, 255, 255, 0.25)
-    }
-
-    .vs-mid {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding-top: 100px
-    }
-
-    .vs-badge {
-      width: 44px;
-      height: 44px;
-      border-radius: 50%;
-      background: rgba(255, 255, 255, 0.05);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 11px;
-      font-weight: 700;
-      color: rgba(255, 255, 255, 0.22)
-    }
-
-    .testimonials {
-      background: #f8faff;
-      padding: 96px 28px
-    }
-
-    .testi-header {
-      margin-bottom: 60px
-    }
-
-    .testi-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 22px
-    }
-
-    .testi-card {
-      background: #fff;
-      border-radius: 16px;
-      border: 1px solid #e2e8f8;
-      padding: 32px;
-      box-shadow: 0 2px 16px rgba(15, 23, 42, 0.05);
-      display: flex;
-      flex-direction: column;
-      transition: box-shadow 0.2s, transform 0.2s
-    }
-
-    .testi-card:hover {
-      box-shadow: 0 8px 36px rgba(15, 23, 42, 0.1);
-      transform: translateY(-3px)
-    }
-
-    .testi-stars {
-      color: #f59e0b;
-      font-size: 16px;
-      letter-spacing: 2px;
-      margin-bottom: 16px
-    }
-
-    .testi-body {
-      font-size: 15px;
-      color: #334155;
-      line-height: 1.8;
-      font-style: italic;
-      flex: 1;
-      margin-bottom: 24px
-    }
-
-    .testi-body::before {
-      content: '\201C';
-      color: #2f54eb;
-      font-size: 22px;
-      font-style: normal;
-      line-height: 0;
-      vertical-align: -6px;
-      margin-right: 3px
-    }
-
-    .testi-body::after {
-      content: '\201D';
-      color: #2f54eb;
-      font-size: 22px;
-      font-style: normal;
-      line-height: 0;
-      vertical-align: -6px;
-      margin-left: 3px
-    }
-
-    .testi-footer {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      padding-top: 20px;
-      border-top: 1px solid #eef2ff
-    }
-
-    .testi-av {
-      width: 42px;
-      height: 42px;
-      border-radius: 50%;
-      background: #eef2ff;
-      color: #2f54eb;
-      font-size: 14px;
-      font-weight: 800;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0
-    }
-
-    .testi-name {
-      font-size: 14px;
-      font-weight: 700;
-      color: #0f172a
-    }
-
-    .testi-place {
-      font-size: 12px;
-      color: #94a3b8;
-      margin-top: 2px
-    }
-
-    .form-section {
-      background: #fff;
-      padding: 96px 28px
-    }
-
-    .form-grid {
-      display: grid;
-      grid-template-columns: 1fr 460px;
-      gap: 64px;
-      align-items: start
-    }
-
-    .form-pitch h2 {
-      font-size: clamp(26px, 2.8vw, 34px);
-      font-weight: 800;
-      color: #0f172a;
-      line-height: 1.25;
-      margin-bottom: 14px
-    }
-
-    .form-pitch p {
-      font-size: 16px;
-      color: #64748b;
-      line-height: 1.8;
-      margin-bottom: 40px
-    }
-
-    .perk-list {
-      display: flex;
-      flex-direction: column;
-      gap: 16px
-    }
-
-    .perk {
-      display: flex;
-      gap: 16px;
-      align-items: flex-start;
-      padding: 16px 20px;
-      background: #f8faff;
-      border: 1px solid #e2e8f8;
-      border-radius: 12px;
-      transition: border-color 0.2s
-    }
-
-    .perk:hover {
-      border-color: #c7d2fe
-    }
-
-    .perk-icon {
-      width: 40px;
-      height: 40px;
-      border-radius: 10px;
-      background: #eef2ff;
-      flex-shrink: 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 18px
-    }
-
-    .perk strong {
-      display: block;
-      font-size: 14px;
-      font-weight: 700;
-      color: #0f172a;
-      margin-bottom: 2px
-    }
-
-    .perk span {
-      font-size: 13px;
-      color: #64748b;
-      line-height: 1.5
-    }
-
-    .form-card {
-      background: #fff;
-      border: 1px solid #dde4f5;
-      border-radius: 20px;
-      padding: 40px;
-      box-shadow: 0 8px 48px rgba(15, 23, 42, 0.1);
-      position: sticky;
-      top: 84px;
-      min-width: 0
-    }
-
-    .fc-head {
-      margin-bottom: 28px
-    }
-
-    .fc-head h3 {
-      font-size: 17px;
-      font-weight: 700;
-      color: #0f172a;
-      margin-bottom: 4px
-    }
-
-    .fc-head p {
-      font-size: 13px;
-      color: #94a3b8
-    }
-
-    .progress {
-      display: flex;
-      gap: 6px;
-      margin-bottom: 32px
-    }
-
-    .prog-step {
-      flex: 1;
-      height: 4px;
-      border-radius: 2px;
-      background: #e2e8f8;
-      transition: background 0.3s
-    }
-
-    .prog-step.on {
-      background: #2f54eb
-    }
-
-    .form-step {
-      display: none
-    }
-
-    .form-step.on {
-      display: block
-    }
-
-    .fs-heading {
-      font-size: 15px;
-      font-weight: 700;
-      color: #0f172a;
-      margin-bottom: 22px
-    }
-
-    .field {
-      margin-bottom: 18px
-    }
-
-    .field label {
-      display: block;
-      font-size: 12px;
-      font-weight: 600;
-      color: #64748b;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-      margin-bottom: 8px
-    }
-
-    .field input,
-    .field select,
-    .field textarea {
-      width: 100%;
-      padding: 12px 15px;
-      border: 1.5px solid #dde4f5;
-      border-radius: 10px;
-      font-family: inherit;
-      font-size: 14px;
-      color: #0f172a;
-      background: #fff;
-      outline: none;
-      transition: border-color 0.2s, box-shadow 0.2s;
-      -webkit-appearance: none
-    }
-
-    .field input:focus,
-    .field select:focus,
-    .field textarea:focus {
-      border-color: #2f54eb;
-      box-shadow: 0 0 0 4px rgba(47, 84, 235, 0.08)
-    }
-
-    .chips {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px
-    }
-
-    .chip {
-      padding: 8px 14px;
-      border: 1.5px solid #dde4f5;
-      border-radius: 30px;
-      font-size: 13px;
-      font-weight: 500;
-      color: #475569;
-      cursor: pointer;
-      user-select: none;
-      background: #fff;
-      transition: all 0.15s
-    }
-
-    .chip:hover {
-      border-color: #2f54eb;
-      color: #2f54eb;
-      background: #eef2ff
-    }
-
-    .chip.on {
-      background: #2f54eb;
-      color: #fff;
-      border-color: #2f54eb
-    }
-
-    .form-actions {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-top: 28px;
-      gap: 10px
-    }
-
-    .step-counter {
-      font-size: 12px;
-      color: #94a3b8;
-      font-weight: 500
-    }
-
-    .btn-back-sm {
-      background: none;
-      border: 1.5px solid #e2e8f8;
-      color: #64748b;
-      padding: 11px 20px;
-      border-radius: 9px;
-      font-size: 14px;
-      font-weight: 600;
-      cursor: pointer;
-      font-family: inherit;
-      transition: all 0.15s
-    }
-
-    .btn-back-sm:hover {
-      border-color: #2f54eb;
-      color: #2f54eb
-    }
-
-    .btn-next-sm {
-      background: #2f54eb;
-      color: #fff;
-      border: none;
-      padding: 12px 28px;
-      border-radius: 9px;
-      font-size: 14px;
-      font-weight: 700;
-      cursor: pointer;
-      font-family: inherit;
-      box-shadow: 0 3px 12px rgba(47, 84, 235, 0.35);
-      transition: all 0.15s
-    }
-
-    .btn-next-sm:hover {
-      background: #1e3fcc;
-      transform: translateY(-1px)
-    }
-
-    .btn-submit-sm {
-      background: #10b981;
-      color: #fff;
-      border: none;
-      padding: 12px 28px;
-      border-radius: 9px;
-      font-size: 14px;
-      font-weight: 700;
-      cursor: pointer;
-      font-family: inherit;
-      box-shadow: 0 3px 12px rgba(16, 185, 129, 0.35);
-      transition: all 0.15s
-    }
-
-    .btn-submit-sm:hover {
-      background: #059669;
-      transform: translateY(-1px)
-    }
-
-    .form-legal {
-      font-size: 12px;
-      color: #94a3b8;
-      text-align: center;
-      margin-top: 16px;
-      line-height: 1.6
-    }
-
-    .form-legal a {
-      color: #2f54eb;
-      text-decoration: none
-    }
-
-    .form-success {
-      display: none;
-      text-align: center;
-      padding: 20px 0
-    }
-
-    .success-circle {
-      width: 68px;
-      height: 68px;
-      border-radius: 50%;
-      background: linear-gradient(135deg, #d1fae5, #a7f3d0);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin: 0 auto 18px;
-      font-size: 32px
-    }
-
-    .form-success h3 {
-      font-size: 20px;
-      font-weight: 800;
-      color: #0f172a;
-      margin-bottom: 10px
-    }
-
-    .form-success p {
-      font-size: 14px;
-      color: #64748b;
-      line-height: 1.7
-    }
-
-    .faq {
-      background: #f8faff;
-      padding: 96px 28px
-    }
-
-    .faq-header {
-      text-align: center;
-      margin-bottom: 56px
-    }
-
-    .faq-header .section-desc {
-      margin: 0 auto
-    }
-
-    .faq-list {
-      max-width: 740px;
-      margin: 0 auto
-    }
-
-    .faq-item {
-      border-bottom: 1px solid #e2e8f8
-    }
-
-    .faq-q {
-      width: 100%;
-      background: none;
-      border: none;
-      text-align: left;
-      padding: 22px 0;
-      cursor: pointer;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      font-family: inherit;
-      font-size: 15px;
-      font-weight: 600;
-      color: #0f172a;
-      gap: 16px;
-      transition: color 0.15s
-    }
-
-    .faq-q:hover {
-      color: #2f54eb
-    }
-
-    .faq-toggle {
-      width: 30px;
-      height: 30px;
-      border-radius: 50%;
-      background: #eef2ff;
-      flex-shrink: 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 18px;
-      color: #2f54eb;
-      line-height: 1;
-      transition: transform 0.3s, background 0.2s
-    }
-
-    .faq-item.open .faq-toggle {
-      transform: rotate(45deg);
-      background: #2f54eb;
-      color: #fff
-    }
-
-    .faq-answer {
-      display: none;
-      padding: 0 0 22px;
-      font-size: 14px;
-      color: #64748b;
-      line-height: 1.85
-    }
-
-    .faq-item.open .faq-answer {
-      display: block
-    }
-
-    .cta-strip {
-      background: #0f172a;
-      padding: 96px 28px;
-      text-align: center;
-      position: relative;
-      overflow: hidden
-    }
-
-    .cta-glow {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      width: 800px;
-      height: 400px;
-      border-radius: 50%;
-      background: radial-gradient(ellipse, rgba(47, 84, 235, 0.18) 0%, transparent 65%);
-      pointer-events: none
-    }
-
-    .cta-inner {
-      position: relative;
-      max-width: 660px;
-      margin: 0 auto
-    }
-
-    .cta-strip h2 {
-      font-size: clamp(28px, 3.5vw, 42px);
-      font-weight: 800;
-      color: #fff;
-      line-height: 1.2;
-      margin-bottom: 16px
-    }
-
-    .cta-strip p {
-      font-size: 17px;
-      color: rgba(255, 255, 255, 0.58);
-      margin-bottom: 36px
-    }
-
-    .cta-meta {
-      font-size: 13px;
-      color: rgba(255, 255, 255, 0.3);
-      margin-top: 18px
-    }
-
-    .footer {
-      background: #080f1e;
-      padding: 64px 28px 28px
-    }
-
-    .footer-grid {
-      max-width: 1100px;
-      margin: 0 auto;
-      display: grid;
-      grid-template-columns: 2.2fr 1fr 1fr;
-      gap: 56px;
-      padding-bottom: 48px;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.07)
-    }
-
-    .footer-logo {
-      font-size: 20px;
-      font-weight: 800;
-      color: #fff;
-      text-decoration: none;
-      letter-spacing: -0.3px;
-      margin-bottom: 12px;
-      display: block
-    }
-
-    .footer-logo span {
-      color: #818cf8
-    }
-
-    .footer-desc {
-      font-size: 13px;
-      color: rgba(255, 255, 255, 0.36);
-      line-height: 1.8;
-      max-width: 280px;
-      margin-bottom: 16px
-    }
-
-    .footer-contact a {
-      display: block;
-      font-size: 13px;
-      color: rgba(255, 255, 255, 0.42);
-      text-decoration: none;
-      margin-bottom: 5px;
-      transition: color 0.15s
-    }
-
-    .footer-contact a:hover {
-      color: #818cf8
-    }
-
-    .footer-col h4 {
-      font-size: 11px;
-      font-weight: 700;
-      letter-spacing: 1px;
-      text-transform: uppercase;
-      color: rgba(255, 255, 255, 0.22);
-      margin-bottom: 18px
-    }
-
-    .footer-col ul {
-      list-style: none
-    }
-
-    .footer-col li {
-      margin-bottom: 10px
-    }
-
-    .footer-col a {
-      font-size: 13px;
-      color: rgba(255, 255, 255, 0.42);
-      text-decoration: none;
-      transition: color 0.15s
-    }
-
-    .footer-col a:hover {
-      color: #818cf8
-    }
-
-    .footer-bottom {
-      max-width: 1100px;
-      margin: 24px auto 0;
-      display: flex;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      gap: 10px
-    }
-
-    .footer-bottom p {
-      font-size: 12px;
-      color: rgba(255, 255, 255, 0.2)
-    }
-
-    .sticky-mobile-cta {
-      display: none;
-      position: fixed;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      z-index: 99;
-      background: #fff;
-      border-top: 1px solid #e2e8f8;
-      padding: 14px 20px;
-      box-shadow: 0 -4px 20px rgba(15, 23, 42, 0.12)
-    }
-
-    @media(max-width:1024px) {
-      .hero-inner {
-        grid-template-columns: 1fr 340px;
-        gap: 32px
-      }
-
-      .form-grid {
-        grid-template-columns: 1fr 420px;
-        gap: 48px
-      }
-    }
-
-    @media(max-width:960px) {
-      .hero {
-        padding: 64px 28px 0
-      }
-
-      .hero-inner {
-        grid-template-columns: 1fr;
-        text-align: center
-      }
-
-      .hero-content {
-        padding-bottom: 48px
-      }
-
-      .hero-sub {
-        margin: 0 auto 36px;
-        max-width: 560px
-      }
-
-      .hero-buttons {
-        justify-content: center
-      }
-
-      .hero-trust {
-        justify-content: center
-      }
-
-      .hero-image-wrap {
-        max-width: 320px;
-        margin: 0 auto
-      }
-
-      .hero-image-wrap img {
-        height: 400px;
-        border-radius: 16px 16px 0 0
-      }
-
-      .steps-grid {
-        grid-template-columns: 1fr
-      }
-
-      .step-divider {
-        display: none
-      }
-
-      .comparison-grid {
-        grid-template-columns: 1fr;
-        gap: 16px
-      }
-
-      .vs-mid {
-        display: none
-      }
-
-      .testi-grid {
-        grid-template-columns: 1fr 1fr
-      }
-
-      .form-grid {
-        grid-template-columns: 1fr
-      }
-
-      .form-card {
-        position: static
-      }
-
-      .footer-grid {
-        grid-template-columns: 1fr 1fr;
-        gap: 40px
-      }
-    }
-
-    @media(max-width:640px) {
-      .hero {
-        padding: 56px 20px 0
-      }
-
-      .hero h1 {
-        font-size: 32px;
-        letter-spacing: -0.5px
-      }
-
-      .hero-sub {
-        font-size: 15px
-      }
-
-      .hero-buttons {
-        flex-direction: column;
-        width: 100%
-      }
-
-      .hero-buttons .btn {
-        width: 100%;
-        justify-content: center
-      }
-
-      .hero-trust {
-        gap: 14px
-      }
-
-      .hero-image-wrap {
-        max-width: 260px
-      }
-
-      .hero-image-wrap img {
-        height: 300px
-      }
-
-      .nav-menu {
-        display: none
-      }
-
-      .testi-grid {
-        grid-template-columns: 1fr
-      }
-
-      .footer-grid {
-        grid-template-columns: 1fr;
-        gap: 36px
-      }
-
-      .footer-bottom {
-        flex-direction: column;
-        gap: 6px
-      }
-
-      .steps,
-      .comparison,
-      .testimonials,
-      .form-section,
-      .faq,
-      .cta-strip {
-        padding-top: 64px;
-        padding-bottom: 64px
-      }
-
-      .form-card {
-        padding: 24px 18px
-      }
-
-      .form-actions {
-        flex-wrap: wrap
-      }
-
-      .step-counter {
-        width: 100%;
-        text-align: center;
-        order: -1
-      }
-
-      .vs-card {
-        padding: 28px 24px
-      }
-
-      .sticky-mobile-cta {
-        display: block
-      }
-
-      body {
-        padding-bottom: 80px
-      }
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth;font-size:16px}
+    body{font-family:'Plus Jakarta Sans',sans-serif;color:#1e293b;background:#fff;line-height:1.65;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+    .container{width:100%;max-width:1100px;margin:0 auto;padding:0 28px}
+    .eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:11px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;color:#2f54eb;background:#eef2ff;border:1px solid #c7d2fe;padding:5px 14px;border-radius:30px;margin-bottom:16px}
+    .eyebrow-dot{width:5px;height:5px;background:#2f54eb;border-radius:50%}
+    .eyebrow--light{color:#a5b4fc;background:rgba(165,180,252,0.1);border-color:rgba(165,180,252,0.2)}
+    .eyebrow--light .eyebrow-dot{background:#a5b4fc}
+    .section-title{font-size:clamp(26px,3vw,36px);font-weight:800;line-height:1.2;color:#0f172a;margin-bottom:14px}
+    .section-title--white{color:#fff}
+    .section-desc{font-size:16px;color:#64748b;line-height:1.8;max-width:520px}
+    .section-desc--white{color:rgba(255,255,255,0.62)}
+    .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:14px 30px;border-radius:10px;font-family:inherit;font-size:15px;font-weight:700;cursor:pointer;border:none;text-decoration:none;transition:all 0.18s ease;white-space:nowrap;line-height:1}
+    .btn-primary{background:#2f54eb;color:#fff;box-shadow:0 4px 16px rgba(47,84,235,0.38)}
+    .btn-primary:hover{background:#1e3fcc;box-shadow:0 6px 24px rgba(47,84,235,0.5);transform:translateY(-1px)}
+    .btn-outline{background:transparent;color:#fff;border:1.5px solid rgba(255,255,255,0.25)}
+    .btn-outline:hover{background:rgba(255,255,255,0.08);border-color:rgba(255,255,255,0.5);transform:translateY(-1px)}
+
+    /* NAV */
+    .nav{position:sticky;top:0;z-index:100;background:rgba(255,255,255,0.96);backdrop-filter:blur(10px);border-bottom:1px solid #e2e8f8}
+    .nav-inner{max-width:1100px;margin:0 auto;padding:0 28px;height:68px;display:flex;align-items:center;justify-content:space-between}
+    .logo{display:flex;align-items:center;gap:10px;font-size:19px;font-weight:800;color:#0f172a;text-decoration:none;letter-spacing:-0.4px}
+    .logo-icon{width:36px;height:36px;background:linear-gradient(135deg,#2f54eb,#4f6ef7);border-radius:9px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+    .logo-icon i{color:#fff;font-size:16px}
+    .logo-text span{color:#2f54eb}
+    .nav-menu{display:flex;gap:32px;list-style:none}
+    .nav-menu a{font-size:14px;font-weight:500;color:#475569;text-decoration:none;transition:color 0.15s}
+    .nav-menu a:hover{color:#2f54eb}
+    .nav-cta{display:flex;align-items:center;gap:12px}
+
+    /* HERO */
+    .hero{background:#0f172a;padding:80px 28px 0;overflow:hidden;position:relative}
+    .hero-glow-1{position:absolute;top:-100px;right:-60px;width:700px;height:700px;border-radius:50%;background:radial-gradient(circle,rgba(47,84,235,0.15) 0%,transparent 65%);pointer-events:none}
+    .hero-glow-2{position:absolute;bottom:0;left:-80px;width:400px;height:400px;border-radius:50%;background:radial-gradient(circle,rgba(16,185,129,0.07) 0%,transparent 70%);pointer-events:none}
+    .hero-inner{max-width:1060px;margin:0 auto;display:grid;grid-template-columns:1fr 420px;gap:48px;align-items:end;position:relative;z-index:2;min-height:620px}
+    .hero-content{padding-bottom:88px}
+    .hero-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(47,84,235,0.14);border:1px solid rgba(47,84,235,0.3);padding:7px 16px;border-radius:30px;font-size:12px;font-weight:600;color:#a5b4fc;margin-bottom:24px}
+    .hero-badge-dot{width:7px;height:7px;background:#818cf8;border-radius:50%;flex-shrink:0;animation:pulse 2s infinite}
+    @keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.6;transform:scale(1.3)}}
+    .hero h1{font-size:clamp(34px,4vw,54px);font-weight:800;color:#fff;line-height:1.1;letter-spacing:-1px;margin-bottom:22px}
+    .hero h1 em{font-style:normal;color:#818cf8}
+    .hero-sub{font-size:17px;color:rgba(255,255,255,0.58);line-height:1.8;max-width:480px;margin:0 0 36px}
+    .hero-buttons{display:flex;gap:14px;flex-wrap:wrap}
+    .hero-trust{display:flex;gap:20px;flex-wrap:wrap;margin-top:36px;padding-top:30px;border-top:1px solid rgba(255,255,255,0.08)}
+    .trust-item{display:flex;align-items:center;gap:8px;font-size:13px;color:rgba(255,255,255,0.42);font-weight:500}
+    .trust-check{width:20px;height:20px;background:rgba(16,185,129,0.18);display:flex;align-items:center;justify-content:center;font-size:11px;color:#34d399;border-radius:50%;flex-shrink:0}
+    .hero-image-wrap{position:relative;align-self:stretch;display:flex;align-items:flex-end;justify-content:center;overflow:hidden}
+    .hero-image-wrap img{width:100%;height:100%;display:block;object-fit:cover;object-position:top center;border-radius:0}
+
+    /* STEPS */
+    .steps{background:#fff;padding:96px 28px}
+    .steps-header{margin-bottom:60px}
+    .steps-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;background:#e2e8f8;border-radius:18px;overflow:hidden}
+    .step-card{background:#fff;padding:40px 36px;position:relative;transition:background 0.2s}
+    .step-card:hover{background:#fafbff}
+    .step-n{display:flex;align-items:center;gap:12px;margin-bottom:20px}
+    .step-n-badge{width:36px;height:36px;border-radius:10px;background:#eef2ff;color:#2f54eb;font-size:15px;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+    .step-n-label{font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:#94a3b8}
+    .step-card h3{font-size:18px;font-weight:700;color:#0f172a;margin-bottom:10px}
+    .step-card p{font-size:14px;color:#64748b;line-height:1.75}
+    .step-divider{position:absolute;right:-14px;top:50%;transform:translateY(-50%);width:28px;height:28px;border-radius:50%;background:#2f54eb;color:#fff;display:flex;align-items:center;justify-content:center;font-size:13px;z-index:2}
+
+    /* COMPARISON */
+    .comparison{background:#0f172a;padding:96px 28px}
+    .comparison-grid{display:grid;grid-template-columns:1fr 60px 1fr;align-items:start;margin-top:56px;gap:0}
+    .vs-card{border-radius:18px;padding:40px 36px}
+    .vs-card-ours{background:linear-gradient(145deg,#2f54eb 0%,#3d66f0 100%);box-shadow:0 20px 60px rgba(47,84,235,0.3)}
+    .vs-card-theirs{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08)}
+    .vs-card-title{font-size:15px;font-weight:700;margin-bottom:28px;display:flex;align-items:center;gap:8px}
+    .vs-card-ours .vs-card-title{color:#fff}
+    .vs-card-theirs .vs-card-title{color:rgba(255,255,255,0.35)}
+    .vs-row{display:flex;align-items:flex-start;gap:12px;margin-bottom:16px;font-size:14px;line-height:1.55}
+    .vs-card-ours .vs-row{color:rgba(255,255,255,0.88)}
+    .vs-card-theirs .vs-row{color:rgba(255,255,255,0.3)}
+    .vs-icon{width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0;margin-top:1px}
+    .vs-card-ours .vs-icon{background:rgba(255,255,255,0.18);color:#fff}
+    .vs-card-theirs .vs-icon{background:rgba(255,255,255,0.06);color:rgba(255,255,255,0.25)}
+    .vs-mid{display:flex;align-items:center;justify-content:center;padding-top:100px}
+    .vs-badge{width:44px;height:44px;border-radius:50%;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:rgba(255,255,255,0.22)}
+
+    /* TESTIMONIALS */
+    .testimonials{background:#f8faff;padding:96px 28px}
+    .testi-header{margin-bottom:60px}
+    .testi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+    .testi-card{background:#fff;border-radius:16px;border:1px solid #e2e8f8;padding:32px;box-shadow:0 2px 16px rgba(15,23,42,0.05);display:flex;flex-direction:column;transition:box-shadow 0.2s,transform 0.2s}
+    .testi-card:hover{box-shadow:0 8px 36px rgba(15,23,42,0.1);transform:translateY(-3px)}
+    .testi-stars{color:#f59e0b;font-size:16px;letter-spacing:2px;margin-bottom:16px}
+    .testi-body{font-size:15px;color:#334155;line-height:1.8;font-style:italic;flex:1;margin-bottom:24px}
+    .testi-body::before{content:'\201C';color:#2f54eb;font-size:22px;font-style:normal;line-height:0;vertical-align:-6px;margin-right:3px}
+    .testi-body::after{content:'\201D';color:#2f54eb;font-size:22px;font-style:normal;line-height:0;vertical-align:-6px;margin-left:3px}
+    .testi-footer{display:flex;align-items:center;gap:12px;padding-top:20px;border-top:1px solid #eef2ff}
+    .testi-av{width:42px;height:42px;border-radius:50%;background:#eef2ff;color:#2f54eb;font-size:14px;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+    .testi-name{font-size:14px;font-weight:700;color:#0f172a}
+    .testi-place{font-size:12px;color:#94a3b8;margin-top:2px}
+
+    /* FORM */
+    .form-section{background:#fff;padding:96px 28px}
+    .form-grid{display:grid;grid-template-columns:1fr 460px;gap:64px;align-items:start}
+    .form-pitch h2{font-size:clamp(26px,2.8vw,34px);font-weight:800;color:#0f172a;line-height:1.25;margin-bottom:14px}
+    .form-pitch p{font-size:16px;color:#64748b;line-height:1.8;margin-bottom:40px}
+    .perk-list{display:flex;flex-direction:column;gap:16px}
+    .perk{display:flex;gap:16px;align-items:flex-start;padding:16px 20px;background:#f8faff;border:1px solid #e2e8f8;border-radius:12px;transition:border-color 0.2s}
+    .perk:hover{border-color:#c7d2fe}
+    .perk-icon{width:40px;height:40px;border-radius:10px;background:#eef2ff;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:17px;color:#2f54eb}
+    .perk strong{display:block;font-size:14px;font-weight:700;color:#0f172a;margin-bottom:2px}
+    .perk span{font-size:13px;color:#64748b;line-height:1.5}
+    .form-card{background:#fff;border:1px solid #dde4f5;border-radius:20px;padding:40px;box-shadow:0 8px 48px rgba(15,23,42,0.1);position:sticky;top:84px;min-width:0}
+    .fc-head{margin-bottom:28px}
+    .fc-head h3{font-size:17px;font-weight:700;color:#0f172a;margin-bottom:4px}
+    .fc-head p{font-size:13px;color:#94a3b8}
+    .progress{display:flex;gap:6px;margin-bottom:32px}
+    .prog-step{flex:1;height:4px;border-radius:2px;background:#e2e8f8;transition:background 0.3s}
+    .prog-step.on{background:#2f54eb}
+    .form-step{display:none}
+    .form-step.on{display:block}
+    .fs-heading{font-size:15px;font-weight:700;color:#0f172a;margin-bottom:22px}
+    .field{margin-bottom:18px}
+    .field label{display:block;font-size:12px;font-weight:600;color:#64748b;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:8px}
+    .field input,.field select,.field textarea{width:100%;padding:12px 15px;border:1.5px solid #dde4f5;border-radius:10px;font-family:inherit;font-size:14px;color:#0f172a;background:#fff;outline:none;transition:border-color 0.2s,box-shadow 0.2s;-webkit-appearance:none}
+    .field input:focus,.field select:focus,.field textarea:focus{border-color:#2f54eb;box-shadow:0 0 0 4px rgba(47,84,235,0.08)}
+    .chips{display:flex;flex-wrap:wrap;gap:8px}
+    .chip{padding:8px 14px;border:1.5px solid #dde4f5;border-radius:30px;font-size:13px;font-weight:500;color:#475569;cursor:pointer;user-select:none;background:#fff;transition:all 0.15s}
+    .chip:hover{border-color:#2f54eb;color:#2f54eb;background:#eef2ff}
+    .chip.on{background:#2f54eb;color:#fff;border-color:#2f54eb}
+    .form-actions{display:flex;justify-content:space-between;align-items:center;margin-top:28px;gap:10px}
+    .step-counter{font-size:12px;color:#94a3b8;font-weight:500}
+    .btn-back-sm{background:none;border:1.5px solid #e2e8f8;color:#64748b;padding:11px 20px;border-radius:9px;font-size:14px;font-weight:600;cursor:pointer;font-family:inherit;transition:all 0.15s}
+    .btn-back-sm:hover{border-color:#2f54eb;color:#2f54eb}
+    .btn-next-sm{background:#2f54eb;color:#fff;border:none;padding:12px 28px;border-radius:9px;font-size:14px;font-weight:700;cursor:pointer;font-family:inherit;box-shadow:0 3px 12px rgba(47,84,235,0.35);transition:all 0.15s}
+    .btn-next-sm:hover{background:#1e3fcc;transform:translateY(-1px)}
+    .btn-submit-sm{background:#10b981;color:#fff;border:none;padding:12px 28px;border-radius:9px;font-size:14px;font-weight:700;cursor:pointer;font-family:inherit;box-shadow:0 3px 12px rgba(16,185,129,0.35);transition:all 0.15s}
+    .btn-submit-sm:hover{background:#059669;transform:translateY(-1px)}
+    .form-legal{font-size:12px;color:#94a3b8;text-align:center;margin-top:16px;line-height:1.6}
+    .form-legal a{color:#2f54eb;text-decoration:none}
+    .form-success{display:none;text-align:center;padding:20px 0}
+    .success-circle{width:68px;height:68px;border-radius:50%;background:linear-gradient(135deg,#d1fae5,#a7f3d0);display:flex;align-items:center;justify-content:center;margin:0 auto 18px;font-size:28px;color:#059669}
+    .form-success h3{font-size:20px;font-weight:800;color:#0f172a;margin-bottom:10px}
+    .form-success p{font-size:14px;color:#64748b;line-height:1.7}
+
+    /* FAQ */
+    .faq{background:#f8faff;padding:96px 28px}
+    .faq-header{text-align:center;margin-bottom:56px}
+    .faq-header .section-desc{margin:0 auto}
+    .faq-list{max-width:740px;margin:0 auto}
+    .faq-item{border-bottom:1px solid #e2e8f8}
+    .faq-q{width:100%;background:none;border:none;text-align:left;padding:22px 0;cursor:pointer;display:flex;justify-content:space-between;align-items:center;font-family:inherit;font-size:15px;font-weight:600;color:#0f172a;gap:16px;transition:color 0.15s}
+    .faq-q:hover{color:#2f54eb}
+    .faq-toggle{width:30px;height:30px;border-radius:50%;background:#eef2ff;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:18px;color:#2f54eb;line-height:1;transition:transform 0.3s,background 0.2s}
+    .faq-item.open .faq-toggle{transform:rotate(45deg);background:#2f54eb;color:#fff}
+    .faq-answer{display:none;padding:0 0 22px;font-size:14px;color:#64748b;line-height:1.85}
+    .faq-item.open .faq-answer{display:block}
+
+    /* CTA */
+    .cta-strip{background:#0f172a;padding:96px 28px;text-align:center;position:relative;overflow:hidden}
+    .cta-glow{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:800px;height:400px;border-radius:50%;background:radial-gradient(ellipse,rgba(47,84,235,0.18) 0%,transparent 65%);pointer-events:none}
+    .cta-inner{position:relative;max-width:660px;margin:0 auto}
+    .cta-strip h2{font-size:clamp(28px,3.5vw,42px);font-weight:800;color:#fff;line-height:1.2;margin-bottom:16px}
+    .cta-strip p{font-size:17px;color:rgba(255,255,255,0.58);margin-bottom:36px}
+    .cta-meta{font-size:13px;color:rgba(255,255,255,0.3);margin-top:18px}
+
+    /* FOOTER */
+    .footer{background:#080f1e;padding:64px 28px 28px}
+    .footer-grid{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:2.2fr 1fr 1fr;gap:56px;padding-bottom:48px;border-bottom:1px solid rgba(255,255,255,0.07)}
+    .footer-logo{display:flex;align-items:center;gap:10px;font-size:19px;font-weight:800;color:#fff;text-decoration:none;letter-spacing:-0.3px;margin-bottom:12px}
+    .footer-logo-icon{width:32px;height:32px;background:linear-gradient(135deg,#2f54eb,#4f6ef7);border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+    .footer-logo-icon i{color:#fff;font-size:14px}
+    .footer-logo span{color:#818cf8}
+    .footer-desc{font-size:13px;color:rgba(255,255,255,0.36);line-height:1.8;max-width:280px;margin-bottom:16px}
+    .footer-contact a{display:block;font-size:13px;color:rgba(255,255,255,0.42);text-decoration:none;margin-bottom:5px;transition:color 0.15s}
+    .footer-contact a:hover{color:#818cf8}
+    .footer-col h4{font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:rgba(255,255,255,0.22);margin-bottom:18px}
+    .footer-col ul{list-style:none}
+    .footer-col li{margin-bottom:10px}
+    .footer-col a{font-size:13px;color:rgba(255,255,255,0.42);text-decoration:none;transition:color 0.15s}
+    .footer-col a:hover{color:#818cf8}
+    .footer-bottom{max-width:1100px;margin:24px auto 0;display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
+    .footer-bottom p{font-size:12px;color:rgba(255,255,255,0.2)}
+
+    /* STICKY MOBILE */
+    .sticky-mobile-cta{display:none;position:fixed;bottom:0;left:0;right:0;z-index:99;background:#fff;border-top:1px solid #e2e8f8;padding:14px 20px;box-shadow:0 -4px 20px rgba(15,23,42,0.12)}
+
+    /* RESPONSIVE */
+    @media(max-width:1024px){
+      .hero-inner{grid-template-columns:1fr 340px;gap:32px}
+      .form-grid{grid-template-columns:1fr 420px;gap:48px}
+    }
+    @media(max-width:960px){
+      .hero{padding:64px 28px 0}
+      .hero-inner{grid-template-columns:1fr;text-align:center}
+      .hero-content{padding-bottom:48px}
+      .hero-sub{margin:0 auto 36px;max-width:560px}
+      .hero-buttons{justify-content:center}
+      .hero-trust{justify-content:center}
+      .hero-image-wrap{max-width:320px;margin:0 auto}
+      .hero-image-wrap img{height:400px;border-radius:16px 16px 0 0}
+      .steps-grid{grid-template-columns:1fr}
+      .step-divider{display:none}
+      .comparison-grid{grid-template-columns:1fr;gap:16px}
+      .vs-mid{display:none}
+      .testi-grid{grid-template-columns:1fr 1fr}
+      .form-grid{grid-template-columns:1fr}
+      .form-card{position:static}
+      .footer-grid{grid-template-columns:1fr 1fr;gap:40px}
+    }
+    @media(max-width:640px){
+      .hero{padding:56px 20px 0}
+      .hero h1{font-size:32px;letter-spacing:-0.5px}
+      .hero-sub{font-size:15px}
+      .hero-buttons{flex-direction:column;width:100%}
+      .hero-buttons .btn{width:100%;justify-content:center}
+      .hero-trust{gap:14px}
+      .hero-image-wrap{max-width:260px}
+      .hero-image-wrap img{height:300px}
+      .nav-menu{display:none}
+      .testi-grid{grid-template-columns:1fr}
+      .footer-grid{grid-template-columns:1fr;gap:36px}
+      .footer-bottom{flex-direction:column;gap:6px}
+      .steps,.comparison,.testimonials,.form-section,.faq,.cta-strip{padding-top:64px;padding-bottom:64px}
+      .form-card{padding:24px 18px}
+      .form-actions{flex-wrap:wrap}
+      .step-counter{width:100%;text-align:center;order:-1}
+      .vs-card{padding:28px 24px}
+      .sticky-mobile-cta{display:block}
+      body{padding-bottom:80px}
     }
   </style>
 </head>
@@ -1372,14 +240,17 @@
 
   <header class="nav">
     <div class="nav-inner">
-      <a class="logo" href="#">Switch<span>Smart</span>.si</a>
+      <a class="logo" href="#">
+        <div class="logo-icon"><i class="fa-solid fa-arrows-rotate"></i></div>
+        <div class="logo-text">Menjaj<span>Operaterja</span>.si</div>
+      </a>
       <ul class="nav-menu">
-        <li><a href="#how-it-works">How it works</a></li>
-        <li><a href="#reviews">Reviews</a></li>
-        <li><a href="#faq">FAQ</a></li>
+        <li><a href="#kako-deluje">Kako deluje</a></li>
+        <li><a href="#mnenja">Mnenja</a></li>
+        <li><a href="#faq">Pogosta vprašanja</a></li>
       </ul>
       <div class="nav-cta">
-        <a href="#get-quote" class="btn btn-primary" style="padding:10px 22px;font-size:14px;">Get free quote →</a>
+        <a href="#povprasevanje" class="btn btn-primary" style="padding:10px 22px;font-size:14px;">Brezplačna ponudba →</a>
       </div>
     </div>
   </header>
@@ -1390,71 +261,59 @@
     <div class="hero-inner">
       <div class="hero-content">
         <div class="hero-badge">
-          <div class="hero-badge-dot"></div>Free service &nbsp;·&nbsp; No obligation
+          <div class="hero-badge-dot"></div>Brezplačna storitev &nbsp;·&nbsp; Brez obveznosti
         </div>
-        <h1>You're probably<br>overpaying for<br><em>telecom services.</em></h1>
-        <p class="hero-sub">Fill in the 2-minute form and within 24 hours we'll send you the best personalised offer
-          from every operator in the country — completely free.</p>
+        <h1>Verjetno preplačujete<br>za <em>telekomske storitve.</em></h1>
+        <p class="hero-sub">Izpolnite 2-minutni obrazec in v 24 urah vam pošljemo najboljšo personalizirano ponudbo vseh operaterjev v državi — popolnoma brezplačno.</p>
         <div class="hero-buttons">
-          <a href="#get-quote" class="btn btn-primary">Get my free quote →</a>
-          <a href="#how-it-works" class="btn btn-outline">How it works</a>
+          <a href="#povprasevanje" class="btn btn-primary">Pridobi brezplačno ponudbo →</a>
+          <a href="#kako-deluje" class="btn btn-outline">Kako deluje</a>
         </div>
         <div class="hero-trust">
-          <div class="trust-item">
-            <div class="trust-check">✓</div>100% private
-          </div>
-          <div class="trust-item">
-            <div class="trust-check">✓</div>All operators compared
-          </div>
-          <div class="trust-item">
-            <div class="trust-check">✓</div>Reply within 3 hours
-          </div>
+          <div class="trust-item"><div class="trust-check">✓</div>100% zasebno</div>
+          <div class="trust-item"><div class="trust-check">✓</div>Vsi operaterji primerjani</div>
+          <div class="trust-item"><div class="trust-check">✓</div>Odgovor v 3 urah</div>
         </div>
       </div>
       <div class="hero-image-wrap">
-        <img
-          src="https://raw.githubusercontent.com/UBALDO17/test-project-funnel-website/main/man-checking-some-important-documents.png"
-          alt="Professional business consultant" />
+        <img src="https://raw.githubusercontent.com/UBALDO17/test-project-funnel-website/main/man-checking-some-important-documents.png" alt="Poslovni svetovalec" />
       </div>
     </div>
   </section>
 
-  <section class="steps" id="how-it-works">
+  <section class="steps" id="kako-deluje">
     <div class="container">
       <div class="steps-header">
-        <div class="eyebrow"><span class="eyebrow-dot"></span>Simple 3-step process</div>
-        <h2 class="section-title">How do you get a lower bill?</h2>
-        <p class="section-desc">From submitting your request to receiving a personalised offer — it all happens within
-          24 hours.</p>
+        <div class="eyebrow"><span class="eyebrow-dot"></span>Preprost 3-koračni postopek</div>
+        <h2 class="section-title">Kako pridete do nižjega računa?</h2>
+        <p class="section-desc">Od oddaje povpraševanja do prejema personalizirane ponudbe — vse se zgodi v 24 urah.</p>
       </div>
       <div class="steps-grid">
         <div class="step-card">
           <div class="step-n">
             <div class="step-n-badge">1</div>
-            <div class="step-n-label">Step one</div>
+            <div class="step-n-label">Korak ena</div>
           </div>
-          <h3>Submit your request</h3>
-          <p>Fill in the quick 3-step form. Tell us what services you use and what you need. Takes under 2 minutes.</p>
+          <h3>Oddajte povpraševanje</h3>
+          <p>Izpolnite hiter 3-koračni obrazec. Povejte nam, katere storitve uporabljate in kaj potrebujete. Traja manj kot 2 minuti.</p>
           <div class="step-divider">→</div>
         </div>
         <div class="step-card">
           <div class="step-n">
             <div class="step-n-badge">2</div>
-            <div class="step-n-label">Step two</div>
+            <div class="step-n-label">Korak dva</div>
           </div>
-          <h3>We find the best offer</h3>
-          <p>Our team compares every operator. Within 24 hours you receive the best tailored offer — completely free.
-          </p>
+          <h3>Poiščemo najboljšo ponudbo</h3>
+          <p>Naša ekipa primerja vse operaterje. V 24 urah prejmete najboljšo prilagojeno ponudbo — popolnoma brezplačno.</p>
           <div class="step-divider">→</div>
         </div>
         <div class="step-card">
           <div class="step-n">
             <div class="step-n-badge">3</div>
-            <div class="step-n-label">Step three</div>
+            <div class="step-n-label">Korak tri</div>
           </div>
-          <h3>Choose and save</h3>
-          <p>If the offer suits you, we send the contract directly. Your only task is to sign it. We handle everything
-            else.</p>
+          <h3>Izberite in prihranite</h3>
+          <p>Če vam ponudba ustreza, vam pošljemo pogodbo neposredno. Vaša edina naloga je, da jo podpišete. Vse ostalo uredimo mi.</p>
         </div>
       </div>
     </div>
@@ -1462,133 +321,97 @@
 
   <section class="comparison">
     <div class="container">
-      <div class="eyebrow eyebrow--light"><span class="eyebrow-dot"></span>Why choose us</div>
-      <h2 class="section-title section-title--white">Us vs. going it alone</h2>
-      <p class="section-desc section-desc--white">Save hours of research. We know every plan, every operator, every
-        promotion — so you don't have to.</p>
+      <div class="eyebrow eyebrow--light"><span class="eyebrow-dot"></span>Zakaj izbrati nas</div>
+      <h2 class="section-title section-title--white">Mi vs. iskanje samemu</h2>
+      <p class="section-desc section-desc--white">Prihranite ure raziskovanja. Poznamo vsak paket, vsakega operaterja, vsako promocijo — da vam ni treba.</p>
       <div class="comparison-grid">
         <div class="vs-card vs-card-ours">
-          <div class="vs-card-title">✓ &nbsp;With SwitchSmart</div>
-          <div class="vs-row">
-            <div class="vs-icon">✓</div>All operators compared in one place
-          </div>
-          <div class="vs-row">
-            <div class="vs-icon">✓</div>Personalised offer for your exact needs
-          </div>
-          <div class="vs-row">
-            <div class="vs-icon">✓</div>Response within 3 hours — no waiting
-          </div>
-          <div class="vs-row">
-            <div class="vs-icon">✓</div>100% free — operators pay us, not you
-          </div>
-          <div class="vs-row">
-            <div class="vs-icon">✓</div>Contract handled and sent directly to you
-          </div>
+          <div class="vs-card-title">✓ &nbsp;Z MenjajOperaterja</div>
+          <div class="vs-row"><div class="vs-icon">✓</div>Vsi operaterji primerjani na enem mestu</div>
+          <div class="vs-row"><div class="vs-icon">✓</div>Personalizirana ponudba za vaše točne potrebe</div>
+          <div class="vs-row"><div class="vs-icon">✓</div>Odgovor v 3 urah — brez čakanja</div>
+          <div class="vs-row"><div class="vs-icon">✓</div>100% brezplačno — operaterji plačajo nas, ne vi</div>
+          <div class="vs-row"><div class="vs-icon">✓</div>Pogodba urejena in poslana neposredno vam</div>
         </div>
-        <div class="vs-mid">
-          <div class="vs-badge">VS</div>
-        </div>
+        <div class="vs-mid"><div class="vs-badge">VS</div></div>
         <div class="vs-card vs-card-theirs">
-          <div class="vs-card-title">✕ &nbsp;Doing it yourself</div>
-          <div class="vs-row">
-            <div class="vs-icon">✕</div>Hours spent comparing different websites
-          </div>
-          <div class="vs-row">
-            <div class="vs-icon">✕</div>Generic plans — nothing personalised
-          </div>
-          <div class="vs-row">
-            <div class="vs-icon">✕</div>Long hold times calling each operator
-          </div>
-          <div class="vs-row">
-            <div class="vs-icon">✕</div>Hidden fees and confusing fine print
-          </div>
-          <div class="vs-row">
-            <div class="vs-icon">✕</div>All admin and paperwork falls on you
-          </div>
+          <div class="vs-card-title">✕ &nbsp;Iskanje samemu</div>
+          <div class="vs-row"><div class="vs-icon">✕</div>Ure primerjanja različnih spletnih strani</div>
+          <div class="vs-row"><div class="vs-icon">✕</div>Splošni paketi — nič personaliziranega</div>
+          <div class="vs-row"><div class="vs-icon">✕</div>Dolgo čakanje na klic vsakega operaterja</div>
+          <div class="vs-row"><div class="vs-icon">✕</div>Skrite pristojbine in zapleteni drobni tisk</div>
+          <div class="vs-row"><div class="vs-icon">✕</div>Vsa administracija in papirologija je na vaš račun</div>
         </div>
       </div>
     </div>
   </section>
 
-  <section class="testimonials" id="reviews">
+  <section class="testimonials" id="mnenja">
     <div class="container">
       <div class="testi-header">
-        <div class="eyebrow"><span class="eyebrow-dot"></span>Real customer reviews</div>
-        <h2 class="section-title">Trusted by 3,000+ happy customers</h2>
-        <p class="section-desc">Real people, real savings — honest feedback from our customers.</p>
+        <div class="eyebrow"><span class="eyebrow-dot"></span>Resnične ocene strank</div>
+        <h2 class="section-title">Zaupanje več kot 3.000 zadovoljnih strank</h2>
+        <p class="section-desc">Pravi ljudje, resnični prihranki — iskrene povratne informacije naših strank.</p>
       </div>
       <div class="testi-grid">
         <div class="testi-card">
           <div class="testi-stars">★★★★★</div>
-          <p class="testi-body">I had nothing to lose so I submitted the form. I got a reply in just 1 hour and now I'm
-            already paying considerably less. Thank you!</p>
+          <p class="testi-body">Nimam kaj izgubiti, sem izpolnil obrazec. Odgovor sem dobil že v 1 uri in zdaj plačujem bistveno manj. Hvala!</p>
           <div class="testi-footer">
             <div class="testi-av">ZK</div>
-            <div>
-              <div class="testi-name">Zoran K.</div>
-              <div class="testi-place">Maribor</div>
-            </div>
+            <div><div class="testi-name">Zoran K.</div><div class="testi-place">Maribor</div></div>
           </div>
         </div>
         <div class="testi-card">
           <div class="testi-stars">★★★★★</div>
-          <p class="testi-body">On a friend's recommendation I filled in the form for mobile and internet. For 3 months
-            now I've been paying around 30% less. Excellent service!</p>
+          <p class="testi-body">Na priporočilo prijateljice sem izpolnila obrazec za mobilni telefon in internet. Že 3 mesece plačujem okoli 30% manj. Odlična storitev!</p>
           <div class="testi-footer">
             <div class="testi-av">IM</div>
-            <div>
-              <div class="testi-name">Irena M.</div>
-              <div class="testi-place">Ljubljana</div>
-            </div>
+            <div><div class="testi-name">Irena M.</div><div class="testi-place">Ljubljana</div></div>
           </div>
         </div>
         <div class="testi-card">
           <div class="testi-stars">★★★★★</div>
-          <p class="testi-body">Until I received the offer I had no idea how much I was overpaying. The whole switch was
-            handled in just a few days. Couldn't be easier!</p>
+          <p class="testi-body">Dokler nisem prejel ponudbe, nisem vedel, koliko preplačujem. Celoten postopek menjave je bil urejen v zgolj nekaj dneh. Enostavnejše ne gre!</p>
           <div class="testi-footer">
             <div class="testi-av">KN</div>
-            <div>
-              <div class="testi-name">Klemen N.</div>
-              <div class="testi-place">Murska Sobota</div>
-            </div>
+            <div><div class="testi-name">Klemen N.</div><div class="testi-place">Murska Sobota</div></div>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <section class="form-section" id="get-quote">
+  <section class="form-section" id="povprasevanje">
     <div class="container">
       <div class="form-grid">
         <div class="form-pitch">
-          <div class="eyebrow"><span class="eyebrow-dot"></span>Get your free quote</div>
-          <h2>Your bill could be lower as early as next month.</h2>
-          <p>Fill in the form in under 2 minutes. We compare every operator and send you the best personalised offer —
-            completely free, no commitment.</p>
+          <div class="eyebrow"><span class="eyebrow-dot"></span>Pridobite brezplačno ponudbo</div>
+          <h2>Vaš račun je lahko nižji že naslednji mesec.</h2>
+          <p>Izpolnite obrazec v manj kot 2 minutah. Primerjamo vse operaterje in vam pošljemo najboljšo personalizirano ponudbo — popolnoma brezplačno, brez obveznosti.</p>
           <div class="perk-list">
             <div class="perk">
-              <div class="perk-icon">✅</div>
-              <div><strong>100% free service</strong><span>We're paid by operators — never by you.</span></div>
+              <div class="perk-icon"><i class="fa-solid fa-circle-check"></i></div>
+              <div><strong>100% brezplačna storitev</strong><span>Plačajo nas operaterji — nikoli vi.</span></div>
             </div>
             <div class="perk">
-              <div class="perk-icon">🔒</div>
-              <div><strong>No obligation</strong><span>Don't like the offer? No problem. Zero pressure.</span></div>
+              <div class="perk-icon"><i class="fa-solid fa-lock"></i></div>
+              <div><strong>Brez obveznosti</strong><span>Ponudba vam ne ustreza? Ni problema. Brez pritiska.</span></div>
             </div>
             <div class="perk">
-              <div class="perk-icon">⚡</div>
-              <div><strong>Fast response</strong><span>In 80% of cases we reply within 3 hours.</span></div>
+              <div class="perk-icon"><i class="fa-solid fa-bolt"></i></div>
+              <div><strong>Hiter odgovor</strong><span>V 80% primerov odgovorimo v 3 urah.</span></div>
             </div>
             <div class="perk">
-              <div class="perk-icon">🤝</div>
-              <div><strong>All operators compared</strong><span>Fully independent — we work with everyone.</span></div>
+              <div class="perk-icon"><i class="fa-solid fa-handshake"></i></div>
+              <div><strong>Vsi operaterji primerjani</strong><span>Popolnoma neodvisni — sodelujemo z vsemi.</span></div>
             </div>
           </div>
         </div>
         <div class="form-card">
           <div class="fc-head">
-            <h3>Request your free offer</h3>
-            <p>Takes less than 2 minutes to complete</p>
+            <h3>Zahtevajte brezplačno ponudbo</h3>
+            <p>Izpolnjevanje traja manj kot 2 minuti</p>
           </div>
           <div class="progress">
             <div class="prog-step on" id="p1"></div>
@@ -1596,26 +419,26 @@
             <div class="prog-step" id="p3"></div>
           </div>
           <div class="form-step on" id="s1">
-            <div class="fs-heading">Which services do you want to pay less for?</div>
+            <div class="fs-heading">Za katere storitve želite plačevati manj?</div>
             <div class="field">
-              <label>Select your services</label>
+              <label>Izberite storitve</label>
               <div class="chips">
-                <div class="chip on" onclick="pickChip(this)">Internet + TV + Mobile</div>
-                <div class="chip" onclick="pickChip(this)">Mobile only</div>
-                <div class="chip" onclick="pickChip(this)">Internet only</div>
+                <div class="chip on" onclick="pickChip(this)">Internet + TV + Mobitel</div>
+                <div class="chip" onclick="pickChip(this)">Samo mobitel</div>
+                <div class="chip" onclick="pickChip(this)">Samo internet</div>
                 <div class="chip" onclick="pickChip(this)">Internet + TV</div>
               </div>
             </div>
             <div class="field">
-              <label>Internet speed preference</label>
+              <label>Želena hitrost interneta</label>
               <div class="chips">
-                <div class="chip on" onclick="pickChip(this)">Standard</div>
-                <div class="chip" onclick="pickChip(this)">Advanced</div>
-                <div class="chip" onclick="pickChip(this)">Not sure</div>
+                <div class="chip on" onclick="pickChip(this)">Standardna</div>
+                <div class="chip" onclick="pickChip(this)">Napredna</div>
+                <div class="chip" onclick="pickChip(this)">Nisem prepričan/a</div>
               </div>
             </div>
             <div class="field">
-              <label>Number of mobile lines</label>
+              <label>Število mobilnih priključkov</label>
               <div class="chips">
                 <div class="chip on" onclick="pickChip(this)">1</div>
                 <div class="chip" onclick="pickChip(this)">2</div>
@@ -1624,70 +447,66 @@
               </div>
             </div>
             <div class="form-actions">
-              <span class="step-counter">Step 1 of 3</span>
-              <button class="btn-next-sm" onclick="goTo(2)">Continue →</button>
+              <span class="step-counter">Korak 1 od 3</span>
+              <button class="btn-next-sm" onclick="goTo(2)">Nadaljuj →</button>
             </div>
           </div>
           <div class="form-step" id="s2">
-            <div class="fs-heading">Your current situation</div>
+            <div class="fs-heading">Vaša trenutna situacija</div>
             <div class="field">
-              <label>Current operator</label>
+              <label>Trenutni operater</label>
               <select>
-                <option value="">Select your operator</option>
+                <option value="">Izberite operaterja</option>
                 <option>Telekom Slovenije</option>
-                <option>T2</option>
+                <option>T-2</option>
                 <option>Telemach</option>
                 <option>A1</option>
-                <option>Other</option>
-                <option>No current operator</option>
+                <option>Drugo</option>
+                <option>Nimam operaterja</option>
               </select>
             </div>
             <div class="field">
-              <label>When does your contract end?</label>
+              <label>Kdaj se izteče vaša pogodba?</label>
               <div class="chips">
-                <div class="chip" onclick="pickChip(this)">No contract</div>
-                <div class="chip on" onclick="pickChip(this)">1–3 months</div>
-                <div class="chip" onclick="pickChip(this)">4–12 months</div>
-                <div class="chip" onclick="pickChip(this)">12+ months</div>
-                <div class="chip" onclick="pickChip(this)">Not sure</div>
+                <div class="chip" onclick="pickChip(this)">Brez pogodbe</div>
+                <div class="chip on" onclick="pickChip(this)">1–3 mesece</div>
+                <div class="chip" onclick="pickChip(this)">4–12 mesecev</div>
+                <div class="chip" onclick="pickChip(this)">12+ mesecev</div>
+                <div class="chip" onclick="pickChip(this)">Ne vem</div>
               </div>
             </div>
             <div class="field">
-              <label>Current monthly spend</label>
+              <label>Trenutni mesečni strošek</label>
               <div class="chips">
-                <div class="chip" onclick="pickChip(this)">Under €20</div>
-                <div class="chip" onclick="pickChip(this)">€20–€40</div>
-                <div class="chip on" onclick="pickChip(this)">€40–€60</div>
-                <div class="chip" onclick="pickChip(this)">€60–€100</div>
-                <div class="chip" onclick="pickChip(this)">Over €100</div>
+                <div class="chip" onclick="pickChip(this)">Pod 20 €</div>
+                <div class="chip" onclick="pickChip(this)">20–40 €</div>
+                <div class="chip on" onclick="pickChip(this)">40–60 €</div>
+                <div class="chip" onclick="pickChip(this)">60–100 €</div>
+                <div class="chip" onclick="pickChip(this)">Nad 100 €</div>
               </div>
             </div>
             <div class="form-actions">
-              <button class="btn-back-sm" onclick="goTo(1)">← Back</button>
-              <button class="btn-next-sm" onclick="goTo(3)">Continue →</button>
+              <button class="btn-back-sm" onclick="goTo(1)">← Nazaj</button>
+              <button class="btn-next-sm" onclick="goTo(3)">Nadaljuj →</button>
             </div>
           </div>
           <div class="form-step" id="s3">
-            <div class="fs-heading">Where should we send your offer?</div>
-            <div class="field"><label>Full name</label><input type="text" placeholder="e.g. Janez Novak"></div>
-            <div class="field"><label>Email address</label><input type="email" placeholder="you@example.com"></div>
-            <div class="field"><label>Phone number</label><input type="tel" placeholder="+386 41 000 000"></div>
-            <div class="field"><label>Address (for coverage check)</label><input type="text" placeholder="Street, City">
-            </div>
-            <div class="field"><label>Notes (optional)</label><textarea rows="2"
-                placeholder="Any special requests or preferences..."></textarea></div>
+            <div class="fs-heading">Kam naj pošljemo vašo ponudbo?</div>
+            <div class="field"><label>Ime in priimek</label><input type="text" placeholder="npr. Janez Novak"></div>
+            <div class="field"><label>E-poštni naslov</label><input type="email" placeholder="vas@primer.si"></div>
+            <div class="field"><label>Telefonska številka</label><input type="tel" placeholder="+386 41 000 000"></div>
+            <div class="field"><label>Naslov (za preveritev pokritosti)</label><input type="text" placeholder="Ulica, Kraj"></div>
+            <div class="field"><label>Opombe (neobvezno)</label><textarea rows="2" placeholder="Posebne želje ali zahteve..."></textarea></div>
             <div class="form-actions">
-              <button class="btn-back-sm" onclick="goTo(2)">← Back</button>
-              <button class="btn-submit-sm" onclick="submitForm()">Send my request ✓</button>
+              <button class="btn-back-sm" onclick="goTo(2)">← Nazaj</button>
+              <button class="btn-submit-sm" onclick="submitForm()">Pošlji povpraševanje ✓</button>
             </div>
-            <p class="form-legal">By submitting you agree to our <a href="#">Privacy Policy</a>. Your data is never
-              sold.</p>
+            <p class="form-legal">Z oddajo se strinjate z našo <a href="#">Politiko zasebnosti</a>. Vaši podatki se nikoli ne prodajajo.</p>
           </div>
           <div class="form-success" id="form-success">
-            <div class="success-circle">✅</div>
-            <h3>Request sent!</h3>
-            <p>We've received your inquiry. Our team will send your personalised offer within 3 hours. Check your inbox
-              and phone!</p>
+            <div class="success-circle"><i class="fa-solid fa-circle-check"></i></div>
+            <h3>Povpraševanje poslano!</h3>
+            <p>Prejeli smo vaše povpraševanje. Naša ekipa vam bo poslala personalizirano ponudbo v 3 urah. Preverite e-pošto in telefon!</p>
           </div>
         </div>
       </div>
@@ -1697,41 +516,30 @@
   <section class="faq" id="faq">
     <div class="container">
       <div class="faq-header">
-        <div class="eyebrow" style="justify-content:center;"><span class="eyebrow-dot"></span>Questions answered</div>
-        <h2 class="section-title">Frequently asked questions</h2>
-        <p class="section-desc">Everything you need to know before submitting your request.</p>
+        <div class="eyebrow" style="justify-content:center;"><span class="eyebrow-dot"></span>Odgovori na vprašanja</div>
+        <h2 class="section-title">Pogosto zastavljena vprašanja</h2>
+        <p class="section-desc">Vse, kar morate vedeti preden oddate povpraševanje.</p>
       </div>
       <div class="faq-list">
         <div class="faq-item">
-          <button class="faq-q" onclick="toggleFaq(this)">Will services be cheaper if I order through you? <span
-              class="faq-toggle">+</span></button>
-          <div class="faq-answer">Yes. Our goal is to find the cheapest available option based on your specific inquiry,
-            across all operators. We often have access to exclusive deals not listed on operator websites.</div>
+          <button class="faq-q" onclick="toggleFaq(this)">Ali bodo storitve cenejše, če naročim prek vas? <span class="faq-toggle">+</span></button>
+          <div class="faq-answer">Da. Naš cilj je poiskati najcenejšo razpoložljivo možnost glede na vaše povpraševanje pri vseh operaterjih. Pogosto imamo dostop do ekskluzivnih ponudb, ki niso objavljene na spletnih straneh operaterjev.</div>
         </div>
         <div class="faq-item">
-          <button class="faq-q" onclick="toggleFaq(this)">Is your service really free? <span
-              class="faq-toggle">+</span></button>
-          <div class="faq-answer">Completely free for you. Operators pay us a referral fee when you switch through us —
-            so we're incentivised to find you the best deal and never favour one provider over another.</div>
+          <button class="faq-q" onclick="toggleFaq(this)">Je vaša storitev res brezplačna? <span class="faq-toggle">+</span></button>
+          <div class="faq-answer">Za vas popolnoma brezplačna. Operaterji nam plačajo provizijo, ko zamenjate prek nas — zato smo motivirani, da vam najdemo najboljšo ponudbo in nikoli ne dajemo prednosti enemu ponudniku pred drugim.</div>
         </div>
         <div class="faq-item">
-          <button class="faq-q" onclick="toggleFaq(this)">Do I need to do anything after submitting the form? <span
-              class="faq-toggle">+</span></button>
-          <div class="faq-answer">Just wait for our email. Once you review the offer and decide to proceed, we handle
-            all paperwork and send the contract to you. Your only task is to sign it — no calls, no store visits.</div>
+          <button class="faq-q" onclick="toggleFaq(this)">Ali moram kaj storiti po oddaji obrazca? <span class="faq-toggle">+</span></button>
+          <div class="faq-answer">Samo počakajte na naš e-mail. Ko pregledate ponudbo in se odločite, mi uredimo vso papirologijo in vam pošljemo pogodbo. Vaša edina naloga je, da jo podpišete — brez klicev, brez obiska poslovalnic.</div>
         </div>
         <div class="faq-item">
-          <button class="faq-q" onclick="toggleFaq(this)">How long does it take to receive an offer? <span
-              class="faq-toggle">+</span></button>
-          <div class="faq-answer">In 80% of cases we have an offer ready within 3 hours. You'll receive it via email,
-            followed by a short phone call to confirm details and answer any questions.</div>
+          <button class="faq-q" onclick="toggleFaq(this)">Kako dolgo traja, da prejmem ponudbo? <span class="faq-toggle">+</span></button>
+          <div class="faq-answer">V 80% primerov imamo ponudbo pripravljeno v 3 urah. Prejmete jo po e-pošti, sledi kratek telefonski klic za potrditev podrobnosti in odgovor na vprašanja.</div>
         </div>
         <div class="faq-item">
-          <button class="faq-q" onclick="toggleFaq(this)">Why do you need my address and contact details? <span
-              class="faq-toggle">+</span></button>
-          <div class="faq-answer">Operators need to verify which technologies and packages are available at your
-            specific address before confirming an offer. Without this we can't guarantee the pricing or availability of
-            the deal.</div>
+          <button class="faq-q" onclick="toggleFaq(this)">Zakaj potrebujete moj naslov in kontaktne podatke? <span class="faq-toggle">+</span></button>
+          <div class="faq-answer">Operaterji morajo preveriti, katere tehnologije in paketi so na voljo na vašem specifičnem naslovu, preden potrdijo ponudbo. Brez tega ne moremo zagotoviti cen ali razpoložljivosti.</div>
         </div>
       </div>
     </div>
@@ -1740,63 +548,61 @@
   <section class="cta-strip">
     <div class="cta-glow"></div>
     <div class="cta-inner">
-      <div class="eyebrow eyebrow--light" style="justify-content:center;margin-bottom:20px;"><span
-          class="eyebrow-dot"></span>Ready to save?</div>
-      <h2>Your bill could be lower as early as next month.</h2>
-      <p>Fill in the form in under 2 minutes. Free of charge, no commitment required.</p>
-      <a href="#get-quote" class="btn btn-primary" style="font-size:16px;padding:16px 36px;">Get my free quote →</a>
-      <p class="cta-meta">🔒 Private &nbsp;·&nbsp; Free &nbsp;·&nbsp; No obligation &nbsp;·&nbsp; All operators compared
-      </p>
+      <div class="eyebrow eyebrow--light" style="justify-content:center;margin-bottom:20px;"><span class="eyebrow-dot"></span>Pripravljeni prihraniti?</div>
+      <h2>Vaš račun je lahko nižji že naslednji mesec.</h2>
+      <p>Izpolnite obrazec v manj kot 2 minutah. Brezplačno, brez obveznosti.</p>
+      <a href="#povprasevanje" class="btn btn-primary" style="font-size:16px;padding:16px 36px;">Pridobi brezplačno ponudbo →</a>
+      <p class="cta-meta"><i class="fa-solid fa-lock" style="margin-right:4px;"></i> Zasebno &nbsp;·&nbsp; Brezplačno &nbsp;·&nbsp; Brez obveznosti &nbsp;·&nbsp; Vsi operaterji primerjani</p>
     </div>
   </section>
 
   <footer class="footer">
     <div class="footer-grid">
       <div>
-        <a class="footer-logo" href="#">Switch<span>Smart</span>.si</a>
-        <p class="footer-desc">Independent telecom comparison service helping customers across the country pay less for
-          their services — completely free of charge.</p>
+        <a class="footer-logo" href="#">
+          <div class="footer-logo-icon"><i class="fa-solid fa-arrows-rotate"></i></div>
+          <div>Menjaj<span>Operaterja</span>.si</div>
+        </a>
+        <p class="footer-desc">Neodvisna primerjalna storitev telekomunikacij, ki pomaga strankam po vsej državi plačevati manj za njihove storitve — popolnoma brezplačno.</p>
         <div class="footer-contact">
-          <a href="mailto:info@switchsmart.si">info@switchsmart.si</a>
-          <a href="tel:+38641000000">+386 41 000 000</a>
+          <a href="mailto:info@menjajoperaterja.si"><i class="fa-solid fa-envelope" style="margin-right:6px;opacity:0.5;"></i>info@menjajoperaterja.si</a>
+          <a href="tel:+38641000000"><i class="fa-solid fa-phone" style="margin-right:6px;opacity:0.5;"></i>+386 41 000 000</a>
         </div>
       </div>
       <div class="footer-col">
-        <h4>Services</h4>
+        <h4>Storitve</h4>
         <ul>
-          <li><a href="#">Internet packages</a></li>
-          <li><a href="#">Mobile plans</a></li>
-          <li><a href="#">TV packages</a></li>
-          <li><a href="#">Bundle deals</a></li>
+          <li><a href="#">Internetni paketi</a></li>
+          <li><a href="#">Mobilni paketi</a></li>
+          <li><a href="#">TV paketi</a></li>
+          <li><a href="#">Kombinacijski paketi</a></li>
         </ul>
       </div>
       <div class="footer-col">
-        <h4>Legal</h4>
+        <h4>Pravno</h4>
         <ul>
-          <li><a href="#">Privacy policy</a></li>
-          <li><a href="#">Terms of service</a></li>
-          <li><a href="#">Cookie policy</a></li>
-          <li><a href="#">Contact us</a></li>
+          <li><a href="#">Politika zasebnosti</a></li>
+          <li><a href="#">Pogoji storitve</a></li>
+          <li><a href="#">Politika piškotkov</a></li>
+          <li><a href="#">Kontaktirajte nas</a></li>
         </ul>
       </div>
     </div>
     <div class="footer-bottom">
-      <p>© 2025 SwitchSmart.si — All rights reserved.</p>
-      <p>Not affiliated with any operator · Independent comparison service</p>
+      <p>© 2026 MenjajOperaterja.si — Vse pravice pridržane.</p>
+      <p>Ni affiliated z nobenim operaterjem · Neodvisna primerjalna storitev</p>
     </div>
   </footer>
 
   <div class="sticky-mobile-cta">
-    <a href="#get-quote" class="btn btn-primary"
-      style="width:100%;justify-content:center;font-size:15px;display:flex;">Get my free quote →</a>
+    <a href="#povprasevanje" class="btn btn-primary" style="width:100%;justify-content:center;font-size:15px;display:flex;">Pridobi brezplačno ponudbo →</a>
   </div>
 
   <script>
-    function goTo(n) { for (var i = 1; i <= 3; i++) { document.getElementById('s' + i).classList.remove('on'); document.getElementById('p' + i).classList.toggle('on', i <= n) } document.getElementById('s' + n).classList.add('on') }
-    function submitForm() { for (var i = 1; i <= 3; i++) { document.getElementById('s' + i).classList.remove('on'); document.getElementById('p' + i).classList.add('on') } document.getElementById('form-success').style.display = 'block' }
-    function pickChip(el) { el.parentElement.querySelectorAll('.chip').forEach(function (c) { c.classList.remove('on') }); el.classList.add('on') }
-    function toggleFaq(btn) { var item = btn.closest('.faq-item'); var open = item.classList.contains('open'); document.querySelectorAll('.faq-item').forEach(function (i) { i.classList.remove('open') }); if (!open) item.classList.add('open') }
+    function goTo(n){for(var i=1;i<=3;i++){document.getElementById('s'+i).classList.remove('on');document.getElementById('p'+i).classList.toggle('on',i<=n)}document.getElementById('s'+n).classList.add('on')}
+    function submitForm(){for(var i=1;i<=3;i++){document.getElementById('s'+i).classList.remove('on');document.getElementById('p'+i).classList.add('on')}document.getElementById('form-success').style.display='block'}
+    function pickChip(el){el.parentElement.querySelectorAll('.chip').forEach(function(c){c.classList.remove('on')});el.classList.add('on')}
+    function toggleFaq(btn){var item=btn.closest('.faq-item');var open=item.classList.contains('open');document.querySelectorAll('.faq-item').forEach(function(i){i.classList.remove('open')});if(!open)item.classList.add('open')}
   </script>
 </body>
-
 </html>
