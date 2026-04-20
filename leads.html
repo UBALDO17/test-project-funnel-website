@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="sl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Izberi storitev — MenjajOperaterja.si</title>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth}
+    body{font-family:'Plus Jakarta Sans',sans-serif;background:#f0f4ff;color:#1e293b;min-height:100vh;-webkit-font-smoothing:antialiased}
+
+    /* NAV */
+    .nav{background:rgba(255,255,255,0.97);backdrop-filter:blur(10px);border-bottom:1px solid #e2e8f8;position:sticky;top:0;z-index:100}
+    .nav-inner{max-width:900px;margin:0 auto;padding:0 24px;height:64px;display:flex;align-items:center;justify-content:space-between}
+    .logo{display:flex;align-items:center;gap:10px;font-size:18px;font-weight:800;color:#0f172a;text-decoration:none}
+    .logo-icon{width:34px;height:34px;background:linear-gradient(135deg,#2f54eb,#4f6ef7);border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+    .logo-icon i{color:#fff;font-size:15px}
+    .logo-text span{color:#2f54eb}
+    .nav-back{display:flex;align-items:center;gap:6px;font-size:13px;font-weight:600;color:#64748b;text-decoration:none;padding:8px 14px;border-radius:8px;border:1.5px solid #e2e8f8;transition:all 0.15s}
+    .nav-back:hover{color:#2f54eb;border-color:#c7d2fe;background:#eef2ff}
+
+    /* TRUST BAR */
+    .trust-bar{background:#fff;border-bottom:1px solid #e2e8f8;padding:10px 24px}
+    .trust-bar-inner{max-width:900px;margin:0 auto;display:flex;gap:24px;justify-content:center;flex-wrap:wrap}
+    .tb-item{display:flex;align-items:center;gap:7px;font-size:12px;color:#64748b;font-weight:500}
+    .tb-item i{color:#2f54eb;font-size:13px}
+
+    /* MAIN WRAPPER */
+    .main{max-width:900px;margin:0 auto;padding:40px 24px 80px}
+
+    /* HEADER */
+    .page-header{text-align:center;margin-bottom:40px}
+    .page-header h1{font-size:clamp(24px,3vw,34px);font-weight:800;color:#0f172a;line-height:1.2;margin-bottom:10px}
+    .page-header p{font-size:15px;color:#64748b;line-height:1.7;max-width:500px;margin:0 auto}
+
+    /* PROGRESS */
+    .wizard-progress{display:flex;align-items:center;justify-content:center;gap:0;margin-bottom:44px}
+    .wp-step{display:flex;flex-direction:column;align-items:center;gap:6px;position:relative}
+    .wp-circle{width:38px;height:38px;border-radius:50%;background:#fff;border:2px solid #dde4f5;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:700;color:#94a3b8;transition:all 0.3s;position:relative;z-index:1}
+    .wp-circle i{font-size:13px}
+    .wp-step.done .wp-circle{background:#2f54eb;border-color:#2f54eb;color:#fff}
+    .wp-step.active .wp-circle{background:#2f54eb;border-color:#2f54eb;color:#fff;box-shadow:0 0 0 5px rgba(47,84,235,0.15)}
+    .wp-label{font-size:11px;font-weight:600;color:#94a3b8;text-transform:uppercase;letter-spacing:0.5px;white-space:nowrap}
+    .wp-step.active .wp-label,.wp-step.done .wp-label{color:#2f54eb}
+    .wp-line{width:80px;height:2px;background:#dde4f5;margin-bottom:22px;transition:background 0.3s}
+    .wp-line.done{background:#2f54eb}
+    @media(max-width:600px){.wp-line{width:40px}}
+
+    /* WIZARD PANE */
+    .wizard-pane{display:none}
+    .wizard-pane.active{display:block}
+
+    /* SERVICE CARDS */
+    .service-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-bottom:32px}
+    @media(max-width:600px){.service-grid{grid-template-columns:1fr}}
+
+    .service-card{background:#fff;border:2px solid #e2e8f8;border-radius:16px;padding:24px 22px;cursor:pointer;transition:all 0.2s;position:relative;display:flex;flex-direction:column;gap:10px}
+    .service-card:hover{border-color:#a5b4fc;background:#fafbff;transform:translateY(-2px);box-shadow:0 6px 24px rgba(47,84,235,0.08)}
+    .service-card.selected{border-color:#2f54eb;background:#eef2ff;box-shadow:0 6px 24px rgba(47,84,235,0.15)}
+    .service-card.selected .sc-check{opacity:1;transform:scale(1)}
+    .sc-check{position:absolute;top:14px;right:14px;width:24px;height:24px;background:#2f54eb;border-radius:50%;display:flex;align-items:center;justify-content:center;opacity:0;transform:scale(0.5);transition:all 0.2s}
+    .sc-check i{color:#fff;font-size:11px}
+    .sc-icon{width:52px;height:52px;border-radius:14px;background:#eef2ff;display:flex;align-items:center;justify-content:center;font-size:22px;color:#2f54eb;flex-shrink:0;transition:background 0.2s}
+    .service-card.selected .sc-icon{background:#dde7ff}
+    .sc-title{font-size:16px;font-weight:700;color:#0f172a}
+    .sc-desc{font-size:13px;color:#64748b;line-height:1.5}
+    .sc-badge{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:600;color:#059669;background:#d1fae5;padding:3px 10px;border-radius:20px;margin-top:2px;width:fit-content}
+    .sc-badge i{font-size:10px}
+
+    /* OPTION GROUPS */
+    .option-group{margin-bottom:28px}
+    .og-label{font-size:12px;font-weight:700;color:#64748b;text-transform:uppercase;letter-spacing:0.8px;margin-bottom:12px}
+    .chips{display:flex;flex-wrap:wrap;gap:8px}
+    .chip{padding:9px 16px;border:1.5px solid #dde4f5;border-radius:30px;font-size:13px;font-weight:500;color:#475569;cursor:pointer;user-select:none;background:#fff;transition:all 0.15s}
+    .chip:hover{border-color:#2f54eb;color:#2f54eb;background:#eef2ff}
+    .chip.on{background:#2f54eb;color:#fff;border-color:#2f54eb}
+    .field{margin-bottom:18px}
+    .field label{display:block;font-size:12px;font-weight:600;color:#64748b;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:8px}
+    .field input,.field select,.field textarea{width:100%;padding:12px 15px;border:1.5px solid #dde4f5;border-radius:10px;font-family:inherit;font-size:14px;color:#0f172a;background:#fff;outline:none;transition:border-color 0.2s,box-shadow 0.2s;-webkit-appearance:none}
+    .field input:focus,.field select:focus,.field textarea:focus{border-color:#2f54eb;box-shadow:0 0 0 4px rgba(47,84,235,0.08)}
+
+    /* OPERATOR SELECT */
+    .operator-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:24px}
+    @media(max-width:500px){.operator-grid{grid-template-columns:repeat(2,1fr)}}
+    .op-card{background:#fff;border:2px solid #e2e8f8;border-radius:12px;padding:16px 12px;cursor:pointer;text-align:center;transition:all 0.2s;display:flex;flex-direction:column;align-items:center;gap:8px}
+    .op-card:hover{border-color:#a5b4fc;background:#fafbff}
+    .op-card.selected{border-color:#2f54eb;background:#eef2ff}
+    .op-icon{width:44px;height:44px;border-radius:12px;background:#f1f5f9;display:flex;align-items:center;justify-content:center;font-size:18px;color:#64748b}
+    .op-card.selected .op-icon{background:#dde7ff;color:#2f54eb}
+    .op-name{font-size:12px;font-weight:700;color:#475569}
+    .op-card.selected .op-name{color:#2f54eb}
+
+    /* BOTTOM ACTIONS */
+    .pane-actions{display:flex;justify-content:space-between;align-items:center;margin-top:8px;gap:12px;flex-wrap:wrap}
+    .btn-back{background:none;border:1.5px solid #e2e8f8;color:#64748b;padding:12px 22px;border-radius:10px;font-size:14px;font-weight:600;cursor:pointer;font-family:inherit;transition:all 0.15s;display:flex;align-items:center;gap:6px}
+    .btn-back:hover{border-color:#2f54eb;color:#2f54eb}
+    .btn-next{background:#2f54eb;color:#fff;border:none;padding:13px 30px;border-radius:10px;font-size:15px;font-weight:700;cursor:pointer;font-family:inherit;box-shadow:0 4px 14px rgba(47,84,235,0.35);transition:all 0.18s;display:flex;align-items:center;gap:8px}
+    .btn-next:hover{background:#1e3fcc;transform:translateY(-1px)}
+    .btn-submit{background:linear-gradient(135deg,#10b981,#059669);color:#fff;border:none;padding:13px 30px;border-radius:10px;font-size:15px;font-weight:700;cursor:pointer;font-family:inherit;box-shadow:0 4px 14px rgba(16,185,129,0.35);transition:all 0.18s;display:flex;align-items:center;gap:8px}
+    .btn-submit:hover{background:linear-gradient(135deg,#059669,#047857);transform:translateY(-1px)}
+
+    /* SECTION CARD */
+    .section-card{background:#fff;border-radius:20px;padding:32px;box-shadow:0 2px 20px rgba(15,23,42,0.06);border:1px solid #e8edf8}
+
+    /* SUCCESS */
+    .success-screen{display:none;text-align:center;padding:48px 24px}
+    .success-screen.show{display:block}
+    .success-anim{width:88px;height:88px;background:linear-gradient(135deg,#d1fae5,#a7f3d0);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 24px;font-size:38px;color:#059669;animation:popIn 0.5s cubic-bezier(0.175,0.885,0.32,1.275)}
+    @keyframes popIn{0%{transform:scale(0);opacity:0}100%{transform:scale(1);opacity:1}}
+    .success-screen h2{font-size:28px;font-weight:800;color:#0f172a;margin-bottom:10px}
+    .success-screen p{font-size:15px;color:#64748b;line-height:1.7;max-width:380px;margin:0 auto 28px}
+    .success-details{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;max-width:480px;margin:0 auto 28px}
+    @media(max-width:480px){.success-details{grid-template-columns:1fr}}
+    .sd-item{background:#f8faff;border:1px solid #e2e8f8;border-radius:12px;padding:16px;text-align:center}
+    .sd-item i{font-size:20px;color:#2f54eb;margin-bottom:8px;display:block}
+    .sd-item strong{display:block;font-size:13px;font-weight:700;color:#0f172a;margin-bottom:2px}
+    .sd-item span{font-size:11px;color:#94a3b8}
+    .legal-note{font-size:12px;color:#94a3b8;line-height:1.6;text-align:center;margin-top:20px}
+    .legal-note a{color:#2f54eb;text-decoration:none}
+  </style>
+</head>
+<body>
+
+  <nav class="nav">
+    <div class="nav-inner">
+      <a class="logo" href="index.html">
+        <div class="logo-icon"><i class="fa-solid fa-arrows-rotate"></i></div>
+        <div class="logo-text">Menjaj<span>Operaterja</span>.si</div>
+      </a>
+      <a href="index.html" class="nav-back"><i class="fa-solid fa-chevron-left"></i> Nazaj</a>
+    </div>
+  </nav>
+
+  <div class="trust-bar">
+    <div class="trust-bar-inner">
+      <div class="tb-item"><i class="fa-solid fa-circle-check"></i> 100% brezplačno</div>
+      <div class="tb-item"><i class="fa-solid fa-lock"></i> Vaši podatki so varni</div>
+      <div class="tb-item"><i class="fa-solid fa-bolt"></i> Odgovor v 3 urah</div>
+      <div class="tb-item"><i class="fa-solid fa-shield-halved"></i> Brez obveznosti</div>
+    </div>
+  </div>
+
+  <div class="main">
+
+    <div class="page-header">
+      <h1>Izberite storitev in prihranite</h1>
+      <p>V eni minuti do brezplačne, personalizirane ponudbe vseh slovenskih operaterjev.</p>
+    </div>
+
+    <!-- PROGRESS BAR -->
+    <div class="wizard-progress" id="wizardProgress">
+      <div class="wp-step active" id="wps1">
+        <div class="wp-circle"><i class="fa-solid fa-wifi"></i></div>
+        <div class="wp-label">Storitev</div>
+      </div>
+      <div class="wp-line" id="wpl1"></div>
+      <div class="wp-step" id="wps2">
+        <div class="wp-circle"><i class="fa-solid fa-building"></i></div>
+        <div class="wp-label">Operater</div>
+      </div>
+      <div class="wp-line" id="wpl2"></div>
+      <div class="wp-step" id="wps3">
+        <div class="wp-circle"><i class="fa-solid fa-sliders"></i></div>
+        <div class="wp-label">Podrobnosti</div>
+      </div>
+      <div class="wp-line" id="wpl3"></div>
+      <div class="wp-step" id="wps4">
+        <div class="wp-circle"><i class="fa-solid fa-user"></i></div>
+        <div class="wp-label">Kontakt</div>
+      </div>
+    </div>
+
+    <!-- STEP 1: SERVICE SELECTION -->
+    <div class="wizard-pane active section-card" id="pane1">
+      <div class="og-label" style="margin-bottom:20px;">Katere storitve vas zanimajo?</div>
+      <div class="service-grid">
+        <div class="service-card selected" onclick="selectService(this,'bundle')" data-val="bundle">
+          <div class="sc-check"><i class="fa-solid fa-check"></i></div>
+          <div class="sc-icon"><i class="fa-solid fa-layer-group"></i></div>
+          <div class="sc-title">Internet + TV + Mobitel</div>
+          <div class="sc-desc">Vse v enem paketu — najpogostejša izbira za celotno gospodinjstvo.</div>
+          <div class="sc-badge"><i class="fa-solid fa-star"></i> Najboljša vrednost</div>
+        </div>
+        <div class="service-card" onclick="selectService(this,'mobile')" data-val="mobile">
+          <div class="sc-check"><i class="fa-solid fa-check"></i></div>
+          <div class="sc-icon"><i class="fa-solid fa-mobile-screen"></i></div>
+          <div class="sc-title">Samo mobitel</div>
+          <div class="sc-desc">Mobilni paket z neomejenim klicanjemin mobilnimi podatki.</div>
+        </div>
+        <div class="service-card" onclick="selectService(this,'internet')" data-val="internet">
+          <div class="sc-check"><i class="fa-solid fa-check"></i></div>
+          <div class="sc-icon"><i class="fa-solid fa-wifi"></i></div>
+          <div class="sc-title">Samo internet</div>
+          <div class="sc-desc">Hitri domači internet brez dodatnih storitev.</div>
+        </div>
+        <div class="service-card" onclick="selectService(this,'tv')" data-val="tv">
+          <div class="sc-check"><i class="fa-solid fa-check"></i></div>
+          <div class="sc-icon"><i class="fa-solid fa-tv"></i></div>
+          <div class="sc-title">Internet + TV</div>
+          <div class="sc-desc">Domači internet skupaj s TV paketom.</div>
+        </div>
+      </div>
+      <div class="pane-actions">
+        <div></div>
+        <button class="btn-next" onclick="goToPane(2)">Nadaljuj <i class="fa-solid fa-arrow-right"></i></button>
+      </div>
+    </div>
+
+    <!-- STEP 2: OPERATOR -->
+    <div class="wizard-pane section-card" id="pane2">
+      <div class="og-label" style="margin-bottom:20px;">Kateri je vaš trenutni operater?</div>
+      <div class="operator-grid">
+        <div class="op-card" onclick="selectOp(this)">
+          <div class="op-icon"><i class="fa-solid fa-signal"></i></div>
+          <div class="op-name">Telekom</div>
+        </div>
+        <div class="op-card" onclick="selectOp(this)">
+          <div class="op-icon"><i class="fa-solid fa-signal"></i></div>
+          <div class="op-name">A1</div>
+        </div>
+        <div class="op-card" onclick="selectOp(this)">
+          <div class="op-icon"><i class="fa-solid fa-signal"></i></div>
+          <div class="op-name">Telemach</div>
+        </div>
+        <div class="op-card" onclick="selectOp(this)">
+          <div class="op-icon"><i class="fa-solid fa-signal"></i></div>
+          <div class="op-name">T-2</div>
+        </div>
+        <div class="op-card" onclick="selectOp(this)">
+          <div class="op-icon"><i class="fa-solid fa-signal"></i></div>
+          <div class="op-name">Bob</div>
+        </div>
+        <div class="op-card" onclick="selectOp(this)">
+          <div class="op-icon"><i class="fa-solid fa-question"></i></div>
+          <div class="op-name">Drugo / Nimam</div>
+        </div>
+      </div>
+
+      <div class="option-group">
+        <div class="og-label">Kdaj se izteče vaša pogodba?</div>
+        <div class="chips">
+          <div class="chip" onclick="pickChip(this)">Brez pogodbe</div>
+          <div class="chip on" onclick="pickChip(this)">1–3 mesece</div>
+          <div class="chip" onclick="pickChip(this)">4–12 mesecev</div>
+          <div class="chip" onclick="pickChip(this)">12+ mesecev</div>
+          <div class="chip" onclick="pickChip(this)">Ne vem</div>
+        </div>
+      </div>
+
+      <div class="option-group">
+        <div class="og-label">Trenutni mesečni strošek</div>
+        <div class="chips">
+          <div class="chip" onclick="pickChip(this)">Pod 20 €</div>
+          <div class="chip" onclick="pickChip(this)">20–40 €</div>
+          <div class="chip on" onclick="pickChip(this)">40–60 €</div>
+          <div class="chip" onclick="pickChip(this)">60–100 €</div>
+          <div class="chip" onclick="pickChip(this)">Nad 100 €</div>
+        </div>
+      </div>
+
+      <div class="pane-actions">
+        <button class="btn-back" onclick="goToPane(1)"><i class="fa-solid fa-arrow-left"></i> Nazaj</button>
+        <button class="btn-next" onclick="goToPane(3)">Nadaljuj <i class="fa-solid fa-arrow-right"></i></button>
+      </div>
+    </div>
+
+    <!-- STEP 3: DETAILS -->
+    <div class="wizard-pane section-card" id="pane3">
+      <div class="og-label" style="margin-bottom:20px;">Podrobnosti povpraševanja</div>
+
+      <div class="option-group">
+        <div class="og-label">Hitrost interneta</div>
+        <div class="chips">
+          <div class="chip on" onclick="pickChip(this)">Standardna (do 100 Mbps)</div>
+          <div class="chip" onclick="pickChip(this)">Hitra (do 500 Mbps)</div>
+          <div class="chip" onclick="pickChip(this)">Gigabitna (1 Gbps+)</div>
+          <div class="chip" onclick="pickChip(this)">Nisem prepričan/a</div>
+        </div>
+      </div>
+
+      <div class="option-group">
+        <div class="og-label">Število mobilnih priključkov</div>
+        <div class="chips">
+          <div class="chip on" onclick="pickChip(this)">1</div>
+          <div class="chip" onclick="pickChip(this)">2</div>
+          <div class="chip" onclick="pickChip(this)">3</div>
+          <div class="chip" onclick="pickChip(this)">4+</div>
+        </div>
+      </div>
+
+      <div class="option-group">
+        <div class="og-label">TV kanali</div>
+        <div class="chips">
+          <div class="chip on" onclick="pickChip(this)">Osnovni paket</div>
+          <div class="chip" onclick="pickChip(this)">Razširjeni paket</div>
+          <div class="chip" onclick="pickChip(this)">Premium (šport, filmi)</div>
+          <div class="chip" onclick="pickChip(this)">Brez TV</div>
+        </div>
+      </div>
+
+      <div class="field">
+        <label>Posebne zahteve (neobvezno)</label>
+        <textarea rows="3" placeholder="Npr. Potrebujem statičen IP, fiksno telefonijo, ali imam posebne želje..."></textarea>
+      </div>
+
+      <div class="pane-actions">
+        <button class="btn-back" onclick="goToPane(2)"><i class="fa-solid fa-arrow-left"></i> Nazaj</button>
+        <button class="btn-next" onclick="goToPane(4)">Nadaljuj <i class="fa-solid fa-arrow-right"></i></button>
+      </div>
+    </div>
+
+    <!-- STEP 4: CONTACT -->
+    <div class="wizard-pane section-card" id="pane4">
+      <div class="og-label" style="margin-bottom:20px;">Kam pošljemo vašo brezplačno ponudbo?</div>
+
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;">
+        <div class="field"><label>Ime</label><input type="text" placeholder="Janez"></div>
+        <div class="field"><label>Priimek</label><input type="text" placeholder="Novak"></div>
+      </div>
+      <div class="field"><label>E-poštni naslov</label><input type="email" placeholder="janez.novak@primer.si"></div>
+      <div class="field"><label>Telefonska številka</label><input type="tel" placeholder="+386 41 000 000"></div>
+      <div style="display:grid;grid-template-columns:2fr 1fr;gap:14px;">
+        <div class="field"><label>Ulica in hišna številka</label><input type="text" placeholder="Slovenska cesta 1"></div>
+        <div class="field"><label>Poštna številka</label><input type="text" placeholder="1000"></div>
+      </div>
+      <div class="field"><label>Kraj</label><input type="text" placeholder="Ljubljana"></div>
+
+      <div class="pane-actions" style="margin-top:24px;">
+        <button class="btn-back" onclick="goToPane(3)"><i class="fa-solid fa-arrow-left"></i> Nazaj</button>
+        <button class="btn-submit" onclick="submitLead()"><i class="fa-solid fa-paper-plane"></i> Pošlji brezplačno povpraševanje</button>
+      </div>
+      <p class="legal-note">Z oddajo se strinjate z <a href="#">Politiko zasebnosti</a>. Vaši podatki so zaščiteni in se nikoli ne prodajajo tretjim osebam.</p>
+    </div>
+
+    <!-- SUCCESS -->
+    <div class="success-screen" id="successScreen">
+      <div class="success-anim"><i class="fa-solid fa-circle-check"></i></div>
+      <h2>Povpraševanje uspešno poslano!</h2>
+      <p>Naša ekipa bo pregledala vaše zahteve in vam v kratkem poslala najboljšo personalizirano ponudbo.</p>
+      <div class="success-details">
+        <div class="sd-item">
+          <i class="fa-solid fa-clock"></i>
+          <strong>V 3 urah</strong>
+          <span>Prejmete ponudbo</span>
+        </div>
+        <div class="sd-item">
+          <i class="fa-solid fa-envelope"></i>
+          <strong>E-pošta</strong>
+          <span>Ponudba na vaš naslov</span>
+        </div>
+        <div class="sd-item">
+          <i class="fa-solid fa-phone"></i>
+          <strong>Klic</strong>
+          <span>Potrditev podrobnosti</span>
+        </div>
+      </div>
+      <a href="index.html" style="display:inline-flex;align-items:center;gap:8px;background:#eef2ff;color:#2f54eb;font-weight:700;font-size:14px;text-decoration:none;padding:12px 24px;border-radius:10px;transition:background 0.15s;" onmouseover="this.style.background='#dde7ff'" onmouseout="this.style.background='#eef2ff'">
+        <i class="fa-solid fa-house"></i> Nazaj na domačo stran
+      </a>
+    </div>
+
+  </div>
+
+  <script>
+    var currentPane = 1;
+    var totalPanes = 4;
+
+    function selectService(el, val) {
+      document.querySelectorAll('.service-card').forEach(function(c){c.classList.remove('selected')});
+      el.classList.add('selected');
+    }
+
+    function selectOp(el) {
+      document.querySelectorAll('.op-card').forEach(function(c){c.classList.remove('selected')});
+      el.classList.add('selected');
+    }
+
+    function pickChip(el) {
+      el.parentElement.querySelectorAll('.chip').forEach(function(c){c.classList.remove('on')});
+      el.classList.add('on');
+    }
+
+    function goToPane(n) {
+      document.getElementById('pane'+currentPane).classList.remove('active');
+      document.getElementById('pane'+n).classList.add('active');
+      updateProgress(n);
+      currentPane = n;
+      window.scrollTo({top:0, behavior:'smooth'});
+    }
+
+    function updateProgress(n) {
+      for(var i=1;i<=4;i++){
+        var step = document.getElementById('wps'+i);
+        step.classList.remove('active','done');
+        if(i < n) step.classList.add('done');
+        if(i === n) step.classList.add('active');
+      }
+      for(var j=1;j<=3;j++){
+        var line = document.getElementById('wpl'+j);
+        if(line) line.classList.toggle('done', j < n);
+      }
+    }
+
+    function submitLead() {
+      for(var i=1;i<=4;i++){
+        document.getElementById('pane'+i).classList.remove('active');
+        var step=document.getElementById('wps'+i);
+        step.classList.remove('active');
+        step.classList.add('done');
+      }
+      for(var j=1;j<=3;j++){
+        var l=document.getElementById('wpl'+j);
+        if(l) l.classList.add('done');
+      }
+      document.getElementById('successScreen').classList.add('show');
+      window.scrollTo({top:0, behavior:'smooth'});
+    }
+  </script>
+</body>
+</html>
