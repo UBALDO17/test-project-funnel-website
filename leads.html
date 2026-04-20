@@ -87,10 +87,19 @@
     .op-card{background:#fff;border:2px solid #e2e8f8;border-radius:12px;padding:16px 12px;cursor:pointer;text-align:center;transition:all 0.2s;display:flex;flex-direction:column;align-items:center;gap:8px}
     .op-card:hover{border-color:#a5b4fc;background:#fafbff}
     .op-card.selected{border-color:#2f54eb;background:#eef2ff}
-    .op-icon{width:44px;height:44px;border-radius:12px;background:#f1f5f9;display:flex;align-items:center;justify-content:center;font-size:18px;color:#64748b}
+    .op-icon{width:44px;height:44px;border-radius:12px;background:#f1f5f9;display:flex;align-items:center;justify-content:center;font-size:18px;color:#64748b;font-weight:800;transition:all 0.2s}
     .op-card.selected .op-icon{background:#dde7ff;color:#2f54eb}
     .op-name{font-size:12px;font-weight:700;color:#475569}
     .op-card.selected .op-name{color:#2f54eb}
+
+    /* Operator specific icon colors */
+    .op-telekom .op-icon{color:#e63946;background:#fff0f1}
+    .op-a1 .op-icon{color:#e8080d;background:#fff0f1}
+    .op-telemach .op-icon{color:#6c2eb9;background:#f3eeff}
+    .op-t2 .op-icon{color:#0072b5;background:#e8f4fd}
+    .op-bob .op-icon{color:#f97316;background:#fff7ed}
+    .op-other .op-icon{color:#64748b;background:#f1f5f9}
+    .op-card.selected .op-icon{background:#dde7ff !important;color:#2f54eb !important}
 
     /* BOTTOM ACTIONS */
     .pane-actions{display:flex;justify-content:space-between;align-items:center;margin-top:8px;gap:12px;flex-wrap:wrap}
@@ -119,6 +128,9 @@
     .sd-item span{font-size:11px;color:#94a3b8}
     .legal-note{font-size:12px;color:#94a3b8;line-height:1.6;text-align:center;margin-top:20px}
     .legal-note a{color:#2f54eb;text-decoration:none}
+
+    /* Operator letter badge style */
+    .op-letter{font-size:16px;font-weight:900;line-height:1}
   </style>
 </head>
 <body>
@@ -212,30 +224,43 @@
     <div class="wizard-pane section-card" id="pane2">
       <div class="og-label" style="margin-bottom:20px;">Kateri je vaš trenutni operater?</div>
       <div class="operator-grid">
-        <div class="op-card" onclick="selectOp(this)">
-          <div class="op-icon"><i class="fa-solid fa-signal"></i></div>
+
+        <!-- Telekom: phone tower icon in brand red -->
+        <div class="op-card op-telekom" onclick="selectOp(this)">
+          <div class="op-icon"><i class="fa-solid fa-tower-broadcast"></i></div>
           <div class="op-name">Telekom</div>
         </div>
-        <div class="op-card" onclick="selectOp(this)">
-          <div class="op-icon"><i class="fa-solid fa-signal"></i></div>
+
+        <!-- A1: sim card icon in A1 red -->
+        <div class="op-card op-a1" onclick="selectOp(this)">
+          <div class="op-icon"><i class="fa-solid fa-sim-card"></i></div>
           <div class="op-name">A1</div>
         </div>
-        <div class="op-card" onclick="selectOp(this)">
-          <div class="op-icon"><i class="fa-solid fa-signal"></i></div>
+
+        <!-- Telemach: satellite dish in purple -->
+        <div class="op-card op-telemach" onclick="selectOp(this)">
+          <div class="op-icon"><i class="fa-solid fa-satellite-dish"></i></div>
           <div class="op-name">Telemach</div>
         </div>
-        <div class="op-card" onclick="selectOp(this)">
-          <div class="op-icon"><i class="fa-solid fa-signal"></i></div>
+
+        <!-- T-2: network/nodes icon in blue -->
+        <div class="op-card op-t2" onclick="selectOp(this)">
+          <div class="op-icon"><i class="fa-solid fa-network-wired"></i></div>
           <div class="op-name">T-2</div>
         </div>
-        <div class="op-card" onclick="selectOp(this)">
-          <div class="op-icon"><i class="fa-solid fa-signal"></i></div>
+
+        <!-- Bob: mobile phone with signal in orange -->
+        <div class="op-card op-bob" onclick="selectOp(this)">
+          <div class="op-icon"><i class="fa-solid fa-mobile-screen-button"></i></div>
           <div class="op-name">Bob</div>
         </div>
-        <div class="op-card" onclick="selectOp(this)">
-          <div class="op-icon"><i class="fa-solid fa-question"></i></div>
+
+        <!-- Other -->
+        <div class="op-card op-other" onclick="selectOp(this)">
+          <div class="op-icon"><i class="fa-solid fa-circle-question"></i></div>
           <div class="op-name">Drugo / Nimam</div>
         </div>
+
       </div>
 
       <div class="option-group">
@@ -365,7 +390,6 @@
 
   <script>
     var currentPane = 1;
-    var totalPanes = 4;
 
     function selectService(el, val) {
       document.querySelectorAll('.service-card').forEach(function(c){c.classList.remove('selected')});
